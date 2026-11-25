@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misi Wuduk: Kenali, Fahami dan Amalkan</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans & Amiri (untuk teks Arab yang jelas) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tone.js untuk kesan bunyi interaktif tanpa fail luaran -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        arabic: ['"Amiri"', 'serif'],
+                    },
+                    colors: {
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        water: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            900: '#0c4a6e',
+                        },
+                        gold: {
+                            100: '#fef3c7',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    boxShadow: {
+                        '3d': '0 10px 25px -5px rgba(6, 78, 59, 0.15), 0 8px 10px -6px rgba(6, 78, 59, 0.1), inset 0 2px 4px 0 rgba(255, 255, 255, 0.6)',
+                        'card-hover': '0 20px 30px -10px rgba(14, 165, 233, 0.25), inset 0 2px 4px 0 rgba(255, 255, 255, 0.8)',
+                        'btn-3d': '0 6px 0 #047857, 0 12px 20px rgba(4, 120, 87, 0.3)',
+                        'btn-3d-blue': '0 6px 0 #0284c7, 0 12px 20px rgba(2, 132, 199, 0.3)',
+                        'btn-3d-gold': '0 6px 0 #d97706, 0 12px 20px rgba(217, 119, 6, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Gaya Khas & Animasi 3D Halus */
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 50%, #f8fafc 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Corak Geometri Islamik Halus sebagai Latar */
+        .islamic-pattern {
+            background-image: radial-gradient(#059669 0.75px, transparent 0.75px), radial-gradient(#0ea5e9 0.75px, #f0f9ff 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.06;
+        }
+
+        /* Kesan Kad 3D */
+        .card-3d {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-3d:hover {
+            transform: translateY(-6px);
+        }
+
+        /* Butang Tekan 3D */
+        .btn-push {
+            transition: all 0.15s ease;
+        }
+        .btn-push:active {
+            transform: translateY(4px);
+            box-shadow: 0 2px 0 #047857, 0 4px 8px rgba(4, 120, 87, 0.2) !important;
+        }
+
+        /* Animasi Titisan Air Terapung */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.8; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+        .hotspot-pulse::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid #0ea5e9;
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+
+        /* Flip Card CSS */
+        .flip-card {
+            perspective: 1000px;
+            cursor: pointer;
+        }
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 1rem;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Teks Arab RTL */
+        .arabic-text {
+            font-family: 'Amiri', serif;
+            direction: rtl;
+            line-height: 2.2;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #10b981;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased relative selection:bg-emerald-500 selection:text-white">
+
+    <!-- Latar Belakang Geometri -->
+    <div class="fixed inset-0 islamic-pattern pointer-events-none z-0"></div>
+
+    <!-- Bar Navigasi Utama (Sentiasa di Atas) -->
+    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-emerald-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Logo & Tajuk -->
+            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 to-water-500 flex items-center justify-center text-white shadow-md">
+                    <i class="fa-solid fa-droplet text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="font-extrabold text-base sm:text-lg tracking-tight text-emerald-900 leading-none">MISI WUDUK</h1>
+                    <p class="text-[11px] font-medium text-water-600 hidden sm:block">Kenali, Fahami & Amalkan</p>
+                </div>
+            </div>
+
+            <!-- Menu Tengah (Desktop) -->
+            <nav class="hidden md:flex items-center gap-2">
+                <button onclick="navigateTo('home')" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                    <i class="fa-solid fa-house mr-1.5"></i>Utama
+                </button>
+                <button onclick="scrollToLevels()" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                    <i class="fa-solid fa-layer-group mr-1.5"></i>Pilih Tahap
+                </button>
+                <button onclick="openModal('modal-panduan')" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                    <i class="fa-solid fa-compass mr-1.5"></i>Panduan
+                </button>
+                <button onclick="openModal('modal-rujukan')" class="px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-emerald-700 hover:bg-emerald-50 transition">
+                    <i class="fa-solid fa-book-quran mr-1.5"></i>Rujukan Ilmu
+                </button>
+            </nav>
+
+            <!-- Status Gamifikasi & Butang Rekod -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <!-- Toggle Bunyi -->
+                <button id="btn-sound" onclick="toggleSound()" title="Kesan Bunyi" class="w-9 h-9 rounded-full bg-slate-100 hover:bg-emerald-100 text-slate-600 hover:text-emerald-700 flex items-center justify-center transition">
+                    <i class="fa-solid fa-volume-high text-sm"></i>
+                </button>
+
+                <!-- Paparan Mata (XP) -->
+                <div class="flex items-center gap-1.5 bg-gold-100 border border-gold-400/50 px-3 py-1.5 rounded-full shadow-inner">
+                    <i class="fa-solid fa-star text-gold-500 text-sm"></i>
+                    <span id="header-score" class="font-extrabold text-sm text-amber-900">0</span>
+                    <span class="text-xs font-semibold text-amber-700 hidden sm:inline">Mata</span>
+                </div>
+
+                <!-- Butang Rekod Pencapaian -->
+                <button onclick="openAchievementsModal()" class="flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-full text-xs sm:text-sm font-bold shadow-sm transition">
+                    <i class="fa-solid fa-trophy text-gold-400"></i>
+                    <span class="hidden sm:inline">Pencapaian</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- KANDUNGAN UTAMA (SINGLE PAGE APPLICATION VIEWPORT) -->
+    <main id="app-container" class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+
+        <!-- ========================================================= -->
+        <!-- HALAMAN 1: LAMAN UTAMA & PILIHAN TAHAP (DIFFERENTIATED)    -->
+        <!-- ========================================================= -->
+        <section id="view-home" class="space-y-12">
+            
+            <!-- Hero Banner 3D -->
+            <div class="relative rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-900 via-emerald-800 to-water-900 text-white shadow-2xl p-6 sm:p-10 lg:p-12 border border-emerald-600/30">
+                <!-- Hiasan Latar 3D SVG Kubah & Titisan Air -->
+                <div class="absolute right-0 bottom-0 opacity-15 pointer-events-none">
+                    <svg width="420" height="320" viewBox="0 0 420 320" fill="none">
+                        <path d="M210 20C140 80 110 140 110 220H310C310 140 280 80 210 20Z" fill="white"/>
+                        <rect x="80" y="220" width="260" height="100" fill="white"/>
+                        <circle cx="210" cy="15" r="8" fill="#fbbf24"/>
+                    </svg>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                    <div class="lg:col-span-7 space-y-5">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/20 text-emerald-100 text-xs sm:text-sm font-semibold">
+                            <span class="w-2 h-2 rounded-full bg-gold-400 animate-ping"></span>
+                            Modul Pembelajaran Terbeza Pendidikan Islam
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                            MISI WUDUK: <br>
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-water-400 via-emerald-300 to-gold-400">
+                                Kenali, Fahami dan Amalkan
+                            </span>
+                        </h2>
+                        <p class="text-emerald-100/90 text-sm sm:text-base lg:text-lg max-w-2xl leading-relaxed">
+                            Selamat datang ke platform pembelajaran interaktif! Kuasai ibadah wuduk mengikut tahap penguasaan anda melalui nota visual 3D, simulasi langkah demi langkah, dan misi gamifikasi berpandukan fiqh Mazhab Syafi'i.
+                        </p>
+
+                        <!-- Butang Tindakan Utama -->
+                        <div class="flex flex-wrap items-center gap-3 pt-2">
+                            <button onclick="scrollToLevels()" class="btn-push bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-extrabold px-6 py-3.5 rounded-2xl shadow-btn-3d flex items-center gap-2 text-sm sm:text-base">
+                                <i class="fa-solid fa-play"></i> MULA BELAJAR
+                            </button>
+                            <button onclick="openModal('modal-panduan')" class="bg-white/15 hover:bg-white/25 backdrop-blur-md border border-white/30 text-white font-bold px-5 py-3.5 rounded-2xl flex items-center gap-2 text-sm sm:text-base transition">
+                                <i class="fa-solid fa-circle-info text-gold-400"></i> PANDUAN PEMBELAJARAN
+                            </button>
+                            <button onclick="openAchievementsModal()" class="bg-water-600/80 hover:bg-water-500 border border-water-400/40 text-white font-bold px-5 py-3.5 rounded-2xl flex items-center gap-2 text-sm sm:text-base transition">
+                                <i class="fa-solid fa-medal text-gold-400"></i> REKOD PENCAPAIAN
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Maskot Pemandu Pembelajaran (Ilustrasi Vektor 3D Mesra & Sopan) -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-64 h-64 sm:w-72 sm:h-72 animate-float">
+                            <!-- Kesan Cahaya Belakang -->
+                            <div class="absolute inset-4 rounded-full bg-gradient-to-tr from-water-400/40 to-gold-400/30 blur-2xl"></div>
+                            <!-- SVG Maskot Murid Muslim Sopan + Paip Air 3D -->
+                            <svg viewBox="0 0 300 300" class="w-full h-full drop-shadow-2xl">
+                                <!-- Latar Bulatan Kaca -->
+                                <circle cx="150" cy="150" r="130" fill="url(#glassGrad)" stroke="rgba(255,255,255,0.4)" stroke-width="3"/>
+                                <!-- Paip Air di Sisi -->
+                                <path d="M235 120 H265 V145 H245 V160 H230 V135 C230 126 235 120 235 120Z" fill="#cbd5e1"/>
+                                <rect x="255" y="110" width="16" height="8" rx="4" fill="#0ea5e9"/>
+                                <!-- Titisan Air -->
+                                <path d="M237 170 C237 170 229 182 229 188 C229 192.4 232.6 196 237 196 C241.4 196 245 192.4 245 188 C245 182 237 170 237 170Z" fill="#38bdf8"/>
+                                <path d="M237 205 C237 205 232 213 232 217 C232 219.8 234.2 222 237 222 C239.8 222 242 219.8 242 217 C242 213 237 205 237 205Z" fill="#7dd3fc"/>
+                                
+                                <!-- Badan Maskot (Baju Melayu Hijau Zamrud Sopan) -->
+                                <path d="M85 255 C85 205 115 185 150 185 C185 185 215 205 215 255 Z" fill="#10b981"/>
+                                <path d="M135 185 L150 215 L165 185 Z" fill="#047857"/>
+                                <!-- Butang Baju Melayu -->
+                                <circle cx="150" cy="222" r="3" fill="#fbbf24"/>
+                                <circle cx="150" cy="235" r="3" fill="#fbbf24"/>
+                                
+                                <!-- Leher & Muka -->
+                                <rect x="138" y="160" width="24" height="28" rx="10" fill="#fed7aa"/>
+                                <circle cx="150" cy="125" r="46" fill="#ffedd5"/>
+                                
+                                <!-- Songkok Hitam Kemas -->
+                                <path d="M106 105 C106 75 194 75 194 105 L190 112 H110 Z" fill="#1e293b"/>
+                                <rect x="108" y="106" width="84" height="5" rx="2" fill="#fbbf24"/>
+                                
+                                <!-- Mata Ceria & Senyuman -->
+                                <circle cx="134" cy="126" r="5" fill="#1e293b"/>
+                                <circle cx="136" cy="124" r="1.5" fill="white"/>
+                                <circle cx="166" cy="126" r="5" fill="#1e293b"/>
+                                <circle cx="168" cy="124" r="1.5" fill="white"/>
+                                <!-- Kening -->
+                                <path d="M126 116 Q134 112 142 116" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                <path d="M158 116 Q166 112 174 116" stroke="#1e293b" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                                <!-- Senyuman Mesra -->
+                                <path d="M138 142 Q150 153 162 142" stroke="#b45309" stroke-width="3" stroke-linecap="round" fill="none"/>
+                                <!-- Pipi -->
+                                <circle cx="123" cy="136" r="5" fill="#fda4af" opacity="0.5"/>
+                                <circle cx="177" cy="136" r="5" fill="#fda4af" opacity="0.5"/>
+
+                                <!-- Tangan Melambai Mesra -->
+                                <path d="M88 225 Q65 195 80 175" stroke="#10b981" stroke-width="18" stroke-linecap="round" fill="none"/>
+                                <circle cx="80" cy="172" r="10" fill="#ffedd5"/>
+
+                                <defs>
+                                    <linearGradient id="glassGrad" x1="20" y1="20" x2="280" y2="280" gradientUnits="userSpaceOnUse">
+                                        <stop stop-color="rgba(255,255,255,0.25)"/>
+                                        <stop offset="1" stop-color="rgba(14,165,233,0.15)"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <!-- Buih Ucapan Maskot -->
+                            <div class="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white text-emerald-900 px-4 py-1.5 rounded-full shadow-lg border border-emerald-100 whitespace-nowrap text-xs font-bold">
+                                "Assalamualaikum! Jom pilih tahap anda!"
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bahagian Pilihan 3 Tahap Pembelajaran -->
+            <div id="section-levels" class="space-y-6 pt-2">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full">Pembelajaran Terbeza</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Pilih Tahap Penguasaan Anda</h3>
+                    <p class="text-slate-600 text-sm sm:text-base">Anda bebas memilih mana-mana tahap yang sesuai dengan tahap pengetahuan sedia ada anda tanpa sebarang sekatan.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+                    
+                    <!-- KAD TAHAP 1: PENJELAJAH WUDUK -->
+                    <div class="card-3d rounded-3xl p-6 sm:p-7 shadow-3d flex flex-col justify-between border-t-4 border-t-water-500 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-water-100/70 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="space-y-4 relative z-10">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-water-100 text-water-900">TAHAP 1 • ASAS</span>
+                                <div class="flex text-gold-400 text-xs gap-0.5" title="Aras Kesukaran: Rendah">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star text-slate-300"></i>
+                                    <i class="fa-regular fa-star text-slate-300"></i>
+                                </div>
+                            </div>
+
+                            <!-- Ilustrasi Ikon 3D Tahap 1 -->
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-water-400 to-water-600 text-white flex items-center justify-center text-3xl shadow-lg">
+                                <i class="fa-solid fa-seedling"></i>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-extrabold text-slate-900">Penjelajah Wuduk</h4>
+                                <p class="text-xs font-semibold text-water-600 mt-0.5">Sesuai untuk murid yang baru mula belajar</p>
+                            </div>
+
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Penerangan ringkas menggunakan ayat mudah, ilustrasi langkah demi langkah, kotak tip <em>"Ingat!"</em>, dan kuiz bergambar yang menyeronokkan.
+                            </p>
+
+                            <!-- Bar Kemajuan Tahap 1 -->
+                            <div class="pt-2">
+                                <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                    <span>Kemajuan Anda</span>
+                                    <span id="prog-text-1">0/7 Topik</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div id="prog-bar-1" class="h-full bg-water-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="startLevel(1)" class="mt-6 w-full btn-push bg-gradient-to-r from-water-500 to-water-600 hover:from-water-400 hover:to-water-500 text-white font-extrabold py-3.5 rounded-2xl shadow-btn-3d-blue flex items-center justify-center gap-2 text-sm">
+                            <span>MULA SEKARANG</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- KAD TAHAP 2: PAKAR WUDUK -->
+                    <div class="card-3d rounded-3xl p-6 sm:p-7 shadow-3d flex flex-col justify-between border-t-4 border-t-emerald-500 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-emerald-100/70 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="space-y-4 relative z-10">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-900">TAHAP 2 • SEDERHANA</span>
+                                <div class="flex text-gold-400 text-xs gap-0.5" title="Aras Kesukaran: Sederhana">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-regular fa-star text-slate-300"></i>
+                                </div>
+                            </div>
+
+                            <!-- Ilustrasi Ikon 3D Tahap 2 -->
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center text-3xl shadow-lg">
+                                <i class="fa-solid fa-compass-drafting"></i>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-extrabold text-slate-900">Pakar Wuduk</h4>
+                                <p class="text-xs font-semibold text-emerald-600 mt-0.5">Sesuai untuk murid yang sudah tahu asas</p>
+                            </div>
+
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Memahami pengertian bahasa & istilah, jadual perbandingan rukun vs sunat, carta anatomi kawasan basuhan, serta aktiviti pengelasan situasi.
+                            </p>
+
+                            <!-- Bar Kemajuan Tahap 2 -->
+                            <div class="pt-2">
+                                <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                    <span>Kemajuan Anda</span>
+                                    <span id="prog-text-2">0/7 Topik</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div id="prog-bar-2" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="startLevel(2)" class="mt-6 w-full btn-push bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-extrabold py-3.5 rounded-2xl shadow-btn-3d flex items-center justify-center gap-2 text-sm">
+                            <span>MULA SEKARANG</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- KAD TAHAP 3: MASTER WUDUK -->
+                    <div class="card-3d rounded-3xl p-6 sm:p-7 shadow-3d flex flex-col justify-between border-t-4 border-t-gold-500 relative overflow-hidden group">
+                        <div class="absolute -right-8 -top-8 w-32 h-32 rounded-full bg-gold-100/70 group-hover:scale-125 transition-transform duration-500"></div>
+                        <div class="space-y-4 relative z-10">
+                            <div class="flex items-center justify-between">
+                                <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-gold-100 text-amber-900">TAHAP 3 • TINGGI (KBAT)</span>
+                                <div class="flex text-gold-500 text-xs gap-0.5" title="Aras Kesukaran: Tinggi">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+
+                            <!-- Ilustrasi Ikon 3D Tahap 3 -->
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-gold-400 to-gold-600 text-white flex items-center justify-center text-3xl shadow-lg">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+
+                            <div>
+                                <h4 class="text-xl font-extrabold text-slate-900">Master Wuduk</h4>
+                                <p class="text-xs font-semibold text-amber-600 mt-0.5">Cabaran penaakulan fiqh & kajian kes</p>
+                            </div>
+
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Analisis mendalam fiqh Mazhab Syafi'i, teks dalil Arab lengkap, sempadan anggota, penyelesaian masalah (KBAT), dan misi <em>"Betulkan Kesilapan"</em>.
+                            </p>
+
+                            <!-- Bar Kemajuan Tahap 3 -->
+                            <div class="pt-2">
+                                <div class="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                    <span>Kemajuan Anda</span>
+                                    <span id="prog-text-3">0/7 Topik</span>
+                                </div>
+                                <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                                    <div id="prog-bar-3" class="h-full bg-gold-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="startLevel(3)" class="mt-6 w-full btn-push bg-gradient-to-r from-gold-500 to-gold-600 hover:from-gold-400 hover:to-gold-500 text-white font-extrabold py-3.5 rounded-2xl shadow-btn-3d-gold flex items-center justify-center gap-2 text-sm">
+                            <span>MULA SEKARANG</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Bahagian Ciri Interaktif & Anatomi Wuduk Pantas (Preview Interaktif di Laman Utama) -->
+            <div class="card-3d rounded-3xl p-6 sm:p-8 shadow-3d border border-emerald-100">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800">PENEROKAAN INTERAKTIF</span>
+                        <h3 class="text-2xl font-extrabold text-slate-900">Kenali Anggota Rukun Wuduk</h3>
+                        <p class="text-sm text-slate-600 leading-relaxed">
+                            Klik pada titik panas (<span class="text-water-600 font-bold">Hotspot Biru</span>) pada ilustrasi murid di sebelah untuk meneroka kawasan anggota wuduk yang wajib dibasuh dan disapu mengikut panduan Mazhab Syafi'i.
+                        </p>
+                        <!-- Kotak Info Dinamik Anggota Wuduk -->
+                        <div id="anatomy-info-box" class="bg-gradient-to-br from-water-50 to-emerald-50 border border-water-200 rounded-2xl p-5 transition-all">
+                            <div class="flex items-center gap-3 mb-2">
+                                <div class="w-10 h-10 rounded-xl bg-water-500 text-white flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-hand-pointer"></i>
+                                </div>
+                                <div>
+                                    <h4 id="anatomy-title" class="font-extrabold text-slate-900">Pilih Mana-Mana Anggota</h4>
+                                    <span id="anatomy-badge" class="text-xs font-bold text-water-700">Klik bulatan pada gambar</span>
+                                </div>
+                            </div>
+                            <p id="anatomy-desc" class="text-sm text-slate-700 leading-relaxed">
+                                Terdapat 4 anggota fizikal utama yang terlibat dalam rukun wuduk iaitu <strong>Muka, Kedua-dua Tangan hingga Siku, Sebahagian Kepala, dan Kedua-dua Kaki hingga Buku Lali</strong>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Ilustrasi Interaktif Anggota Wuduk -->
+                    <div class="lg:col-span-7 flex justify-center">
+                        <div class="relative w-full max-w-md bg-gradient-to-b from-water-100/60 to-emerald-100/60 rounded-3xl p-4 border border-white shadow-inner flex justify-center items-center">
+                            <svg viewBox="0 0 320 380" class="w-full max-w-[300px] h-auto">
+                                <!-- Latar Belakang Masjid Ringkas -->
+                                <rect x="20" y="20" width="280" height="340" rx="24" fill="white" opacity="0.7"/>
+                                
+                                <!-- Bentuk Badan Murid Sopan (Menutup Aurat) -->
+                                <!-- Kepala & Rambut -->
+                                <circle cx="160" cy="85" r="36" fill="#ffedd5"/>
+                                <path d="M124 80 C124 50 196 50 196 80 C196 68 180 62 160 62 C140 62 124 68 124 80 Z" fill="#1e293b"/>
+                                <!-- Mata & Senyum -->
+                                <circle cx="148" cy="85" r="3" fill="#1e293b"/>
+                                <circle cx="172" cy="85" r="3" fill="#1e293b"/>
+                                <path d="M152 98 Q160 105 168 98" stroke="#b45309" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+
+                                <!-- Baju Lengan Pendek/Disingsing Hingga Atas Siku untuk Wuduk -->
+                                <path d="M115 130 C115 122 205 122 205 130 L215 235 H105 Z" fill="#059669"/>
+                                <!-- Lengan Kiri & Kanan (Menunjukkan Siku) -->
+                                <path d="M115 132 L75 185 L90 198 L122 155 Z" fill="#ffedd5"/>
+                                <path d="M205 132 L245 185 L230 198 L198 155 Z" fill="#ffedd5"/>
+                                <!-- Lengan Baju Singkat (Singsing) -->
+                                <path d="M115 130 L95 155 L110 165 L125 142 Z" fill="#047857"/>
+                                <path d="M205 130 L225 155 L210 165 L195 142 Z" fill="#047857"/>
+
+                                <!-- Seluar Panjang Sopan (Disingsing Hingga Atas Buku Lali) -->
+                                <rect x="115" y="235" width="38" height="90" rx="6" fill="#1e293b"/>
+                                <rect x="167" y="235" width="38" height="90" rx="6" fill="#1e293b"/>
+
+                                <!-- Kaki & Buku Lali -->
+                                <path d="M122 325 H146 V345 L112 352 C108 352 108 345 115 342 L122 338 Z" fill="#ffedd5"/>
+                                <path d="M174 325 H198 V338 L205 342 C212 345 212 352 208 352 L174 345 Z" fill="#ffedd5"/>
+
+                                <!-- Garis Sempadan Anggota Wuduk (Putus-putus Biru) -->
+                                <ellipse cx="160" cy="88" rx="28" ry="30" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="4 3" fill="none"/>
+                                <line x1="92" y1="158" x2="112" y2="168" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="3 2"/>
+                                <line x1="228" y1="158" x2="208" y2="168" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="3 2"/>
+                                <line x1="120" y1="330" x2="148" y2="330" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="3 2"/>
+                                <line x1="172" y1="330" x2="200" y2="330" stroke="#0ea5e9" stroke-width="2.5" stroke-dasharray="3 2"/>
+                            </svg>
+
+                            <!-- Hotspot Interaktif HTML di atas SVG -->
+                            <!-- 1. Kepala -->
+                            <button onclick="selectAnatomy('kepala')" style="top: 13%; left: 50%;" class="hotspot-pulse -translate-x-1/2 -translate-y-1/2 absolute w-8 h-8 rounded-full bg-emerald-600 text-white text-xs font-extrabold shadow-lg border-2 border-white flex items-center justify-center hover:scale-110 transition" title="Kepala">
+                                1
+                            </button>
+                            <!-- 2. Muka -->
+                            <button onclick="selectAnatomy('muka')" style="top: 25%; left: 58%;" class="hotspot-pulse -translate-x-1/2 -translate-y-1/2 absolute w-8 h-8 rounded-full bg-water-600 text-white text-xs font-extrabold shadow-lg border-2 border-white flex items-center justify-center hover:scale-110 transition" title="Muka">
+                                2
+                            </button>
+                            <!-- 3. Tangan hingga Siku -->
+                            <button onclick="selectAnatomy('tangan')" style="top: 47%; left: 26%;" class="hotspot-pulse -translate-x-1/2 -translate-y-1/2 absolute w-8 h-8 rounded-full bg-water-600 text-white text-xs font-extrabold shadow-lg border-2 border-white flex items-center justify-center hover:scale-110 transition" title="Tangan hingga Siku">
+                                3
+                            </button>
+                            <!-- 4. Kaki hingga Buku Lali -->
+                            <button onclick="selectAnatomy('kaki')" style="top: 86%; left: 38%;" class="hotspot-pulse -translate-x-1/2 -translate-y-1/2 absolute w-8 h-8 rounded-full bg-water-600 text-white text-xs font-extrabold shadow-lg border-2 border-white flex items-center justify-center hover:scale-110 transition" title="Kaki hingga Buku Lali">
+                                4
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- HALAMAN 2: RUANG PEMBELAJARAN INTERAKTIF (7 TOPIK + KUIZ)  -->
+        <!-- ========================================================= -->
+        <section id="view-learning" class="hidden space-y-6">
+            
+            <!-- Bar Atas Ruang Belajar: Info Tahap, Kemajuan & Navigasi -->
+            <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-sm border border-emerald-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <button onclick="navigateTo('home')" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-arrow-left"></i> Laman Utama
+                    </button>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span id="learn-level-badge" class="px-2.5 py-0.5 rounded-full text-xs font-extrabold bg-emerald-100 text-emerald-800">TAHAP 1</span>
+                            <h2 id="learn-level-title" class="font-extrabold text-base sm:text-lg text-slate-900">Penjelajah Wuduk</h2>
+                        </div>
+                        <p id="learn-level-subtitle" class="text-xs text-slate-500">Pilih mana-mana daripada 7 topik di bawah untuk mula meneroka.</p>
+                    </div>
+                </div>
+
+                <!-- Bar Kemajuan & Butang Ulang Semula -->
+                <div class="flex items-center gap-4">
+                    <div class="w-36 sm:w-48">
+                        <div class="flex justify-between text-xs font-bold text-slate-600 mb-1">
+                            <span>Kemajuan Tahap</span>
+                            <span id="learn-progress-pct">0%</span>
+                        </div>
+                        <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                            <div id="learn-progress-bar" class="h-full bg-emerald-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <button onclick="resetCurrentLevelProgress()" title="Ulang Semula Tahap Ini" class="p-2.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 text-xs font-bold transition">
+                        <i class="fa-solid fa-rotate-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Menu 7 Topik Pembelajaran Interaktif (Horizontal Scroll di Mobile, Grid di Desktop) -->
+            <div id="topics-nav" class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5">
+                <!-- Dijana secara dinamik oleh JavaScript -->
+            </div>
+
+            <!-- Kanvas Kandungan Topik & Misi Aktiviti -->
+            <div id="topic-content-area" class="card-3d rounded-3xl p-5 sm:p-8 lg:p-10 shadow-3d border border-emerald-100 min-h-[450px]">
+                <!-- Kandungan terperinci mengikut Tahap & Topik akan dipaparkan di sini -->
+            </div>
+
+            <!-- Navigasi Bawah: Topik Sebelumnya & Seterusnya -->
+            <div class="flex items-center justify-between pt-2">
+                <button id="btn-prev-topic" onclick="changeTopic(-1)" class="px-5 py-3 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 font-bold text-sm shadow-sm flex items-center gap-2 transition disabled:opacity-40 disabled:pointer-events-none">
+                    <i class="fa-solid fa-chevron-left"></i> Topik Sebelumnya
+                </button>
+
+                <div class="text-xs font-bold text-slate-500 hidden sm:block">
+                    Topik <span id="current-topic-num" class="text-emerald-700">1</span> daripada 7
+                </div>
+
+                <button id="btn-next-topic" onclick="changeTopic(1)" class="btn-push px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-btn-3d flex items-center gap-2 transition">
+                    <span>Topik Seterusnya</span> <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- MODAL-MODAL INTERAKTIF (PANDUAN, PENCAPAIAN, RUJUKAN)     -->
+    <!-- ========================================================= -->
+
+    <!-- Modal 1: Panduan Pembelajaran -->
+    <div id="modal-panduan" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-5 relative animate-fade-in">
+            <button onclick="closeModal('modal-panduan')" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-compass"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold text-slate-900">Panduan Pembelajaran</h3>
+                    <p class="text-xs text-slate-500">Cara menggunakan nota digital Misi Wuduk</p>
+                </div>
+            </div>
+            <div class="space-y-3 text-sm text-slate-600 leading-relaxed">
+                <div class="p-3.5 rounded-2xl bg-water-50 border border-water-100 flex gap-3">
+                    <span class="font-extrabold text-water-700">1.</span>
+                    <p><strong>Pilih Tahap Sesuai:</strong> Anda boleh memilih <em>Penjelajah (Asas)</em>, <em>Pakar (Sederhana)</em>, atau <em>Master (Tinggi/KBAT)</em> mengikut keselesaan anda.</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-100 flex gap-3">
+                    <span class="font-extrabold text-emerald-700">2.</span>
+                    <p><strong>Teroka 7 Kandungan Utama:</strong> Klik pada kad imbas, gambar rajah anggota, dan simulasi langkah berwuduk untuk memahami ilmu dengan mendalam.</p>
+                </div>
+                <div class="p-3.5 rounded-2xl bg-gold-100/60 border border-gold-400/30 flex gap-3">
+                    <span class="font-extrabold text-amber-700">3.</span>
+                    <p><strong>Selesaikan Misi Gamifikasi:</strong> Setiap topik mempunyai aktiviti interaktif (kuiz, padanan, susunan urutan atau kajian kes) untuk mengumpul mata dan lencana.</p>
+                </div>
+            </div>
+            <button onclick="closeModal('modal-panduan')" class="w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm">
+                Faham, Jom Mula!
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal 2: Rekod Pencapaian & Lencana -->
+    <div id="modal-pencapaian" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl space-y-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeModal('modal-pencapaian')" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-2xl bg-gold-100 text-gold-600 flex items-center justify-center text-2xl">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-extrabold text-slate-900">Rekod Pencapaian & Lencana</h3>
+                        <p class="text-xs text-slate-500">Kumpul semua 5 lencana rasmi Misi Wuduk!</p>
+                    </div>
+                </div>
+                <div class="text-right pr-8">
+                    <div class="text-2xl font-extrabold text-emerald-700" id="modal-total-score">0 Mata</div>
+                    <div class="text-xs font-semibold text-slate-500" id="modal-completed-count">0 Topik Selesai</div>
+                </div>
+            </div>
+
+            <!-- Grid 5 Lencana Pencapaian -->
+            <div id="badges-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <!-- Dijana oleh JS -->
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-slate-100">
+                <button onclick="confirmResetAll()" class="text-xs font-bold text-rose-600 hover:underline">
+                    <i class="fa-solid fa-trash-can mr-1"></i> Set Semula Semua Rekod
+                </button>
+                <button onclick="closeModal('modal-pencapaian')" class="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-bold text-sm">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Rujukan Ilmu Berautoriti -->
+    <div id="modal-rujukan" class="fixed inset-0 z-50 hidden bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-5 relative">
+            <button onclick="closeModal('modal-rujukan')" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl">
+                    <i class="fa-solid fa-book-quran"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-extrabold text-slate-900">Rujukan Ilmu</h3>
+                    <p class="text-xs text-slate-500">Sumber berautoriti fiqh Mazhab Syafi'i</p>
+                </div>
+            </div>
+            <ul class="space-y-2.5 text-sm text-slate-700 list-disc pl-5 leading-relaxed">
+                <li><strong>Al-Quran al-Karim:</strong> Surah al-Ma'idah, ayat 6 (Dalil kewajipan wuduk dan rukun-rukunnya).</li>
+                <li><strong>Sahih al-Bukhari & Sahih Muslim:</strong> Hadis riwayat al-Bara' bin 'Azib r.a. tentang sunat berwuduk sebelum tidur.</li>
+                <li><strong>Kitab al-Fiqh al-Manhaji 'ala Mazhab al-Imam al-Syafi'i:</strong> Dr. Mustafa al-Khin, Dr. Mustafa al-Bugha & 'Ali al-Syarbaji (Bab Taharah & Wuduk).</li>
+                <li><strong>Dokumen Standard Kurikulum dan Pentaksiran (DSKP) & Buku Teks Pendidikan Islam KSSR:</strong> Kementerian Pendidikan Malaysia (KPM).</li>
+                <li><strong>Garis Panduan Bersuci & Berwuduk:</strong> Jabatan Kemajuan Islam Malaysia (JAKIM).</li>
+            </ul>
+            <button onclick="closeModal('modal-rujukan')" class="w-full py-3 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-bold text-sm">
+                Tutup Rujukan
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Notification (Pengganti alert() yang mesra pengguna) -->
+    <div id="toast-notification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-slate-700 flex items-center gap-3 max-w-sm">
+            <div id="toast-icon" class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <h5 id="toast-title" class="font-bold text-sm">Tahniah!</h5>
+                <p id="toast-msg" class="text-xs text-slate-300">Anda mendapat lencana baharu.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- LOGIK JAVASCRIPT & PANGKALAN DATA PENDIDIKAN ISLAM        -->
+    <!-- ========================================================= -->
+    <script>
+        // ==========================================
+        // 1. SISTEM AUDIO (TONE.JS) UNTUK GAMIFIKASI
+        // ==========================================
+        let soundEnabled = true;
+        let synth = null;
+
+        function initAudio() {
+            if (!synth && typeof Tone !== 'undefined') {
+                synth = new Tone.PolySynth(Tone.Synth).toDestination();
+                synth.volume.value = -8;
+            }
+        }
+
+        function playSound(type) {
+            if (!soundEnabled) return;
+            try {
+                initAudio();
+                if (Tone.context.state !== 'running') {
+                    Tone.start();
+                }
+                const now = Tone.now();
+                if (type === 'click') {
+                    synth.triggerAttackRelease("C5", "32n", now);
+                } else if (type === 'success') {
+                    synth.triggerAttackRelease(["C5", "E5", "G5"], "16n", now);
+                    synth.triggerAttackRelease("C6", "8n", now + 0.15);
+                } else if (type === 'error') {
+                    synth.triggerAttackRelease(["E3", "Eb3"], "8n", now);
+                } else if (type === 'badge') {
+                    synth.triggerAttackRelease("G4", "16n", now);
+                    synth.triggerAttackRelease("C5", "16n", now + 0.1);
+                    synth.triggerAttackRelease("E5", "16n", now + 0.2);
+                    synth.triggerAttackRelease("G5", "4n", now + 0.3);
+                }
+            } catch (e) {
+                // Abaikan jika browser menyekat audio sebelum interaksi
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('btn-sound');
+            btn.innerHTML = soundEnabled 
+                ? '<i class="fa-solid fa-volume-high text-sm"></i>' 
+                : '<i class="fa-solid fa-volume-xmark text-sm text-rose-500"></i>';
+            showToast(soundEnabled ? "Bunyi Diaktifkan" : "Bunyi Disenyapkan", "Tetapan audio dikemas kini.", "info");
+        }
+
+        // ==========================================
+        // 2. PENGURUSAN KEADAAN & SIMPANAN KEMAJUAN
+        // ==========================================
+        const STORAGE_KEY = 'misi_wuduk_state_v1';
+
+        let appState = {
+            currentLevel: 1,
+            currentTopic: 0, // 0 hingga 6
+            score: 0,
+            completedTopics: {
+                1: [], // Array indeks topik selesai untuk Tahap 1
+                2: [],
+                3: []
+            },
+            badges: []
+        };
+
+        const BADGES_CONFIG = [
+            { id: 'kenali_wuduk', title: 'Lencana Kenali Wuduk', desc: 'Menyelesaikan Topik 1 (Maksud) atau Topik 2 (Kepentingan)', icon: 'fa-droplet', color: 'from-water-400 to-water-600' },
+            { id: 'penjaga_rukun', title: 'Lencana Penjaga Rukun', desc: 'Menguasai semua 6 Rukun Wuduk dalam Topik 4', icon: 'fa-shield-halved', color: 'from-emerald-500 to-emerald-700' },
+            { id: 'sahabat_sunnah', title: 'Lencana Sahabat Sunnah', desc: 'Menyelesaikan Topik 3 (Dalil) atau Topik 5 (Sunat Wuduk)', icon: 'fa-book-open', color: 'from-teal-500 to-emerald-600' },
+            { id: 'pakar_langkah', title: 'Lencana Pakar Langkah Wuduk', desc: 'Berjaya menyusun & memahami urutan langkah wuduk (Topik 6)', icon: 'fa-shoe-prints', color: 'from-blue-500 to-indigo-600' },
+            { id: 'elak_bazir', title: 'Lencana Elak Pembaziran Air', desc: 'Menguasai perkara makruh ketika berwuduk (Topik 7)', icon: 'fa-hand-holding-droplet', color: 'from-gold-400 to-gold-600' }
+        ];
+
+        function loadState() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    appState = { ...appState, ...parsed };
+                }
+            } catch (e) {
+                console.warn("Tidak dapat memuatkan kemajuan:", e);
+            }
+            updateUIStats();
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.warn("Tidak dapat menyimpan kemajuan:", e);
+            }
+            updateUIStats();
+        }
+
+        function updateUIStats() {
+            document.getElementById('header-score').textContent = appState.score;
+            
+            // Kemas kini bar kemajuan di halaman utama bagi setiap tahap
+            [1, 2, 3].forEach(lvl => {
+                const count = appState.completedTopics[lvl]?.length || 0;
+                const pct = Math.round((count / 7) * 100);
+                const bar = document.getElementById(`prog-bar-${lvl}`);
+                const txt = document.getElementById(`prog-text-${lvl}`);
+                if (bar) bar.style.width = `${pct}%`;
+                if (txt) txt.textContent = `${count}/7 Topik`;
+            });
+        }
+
+        function awardPointsAndCompletion(level, topicIdx, points = 20) {
+            const list = appState.completedTopics[level];
+            let isFirstTime = false;
+            if (!list.includes(topicIdx)) {
+                list.push(topicIdx);
+                appState.score += points;
+                isFirstTime = true;
+            }
+
+            // Semak kelayakan lencana
+            if (topicIdx === 0 || topicIdx === 1) unlockBadge('kenali_wuduk');
+            if (topicIdx === 3) unlockBadge('penjaga_rukun');
+            if (topicIdx === 2 || topicIdx === 4) unlockBadge('sahabat_sunnah');
+            if (topicIdx === 5) unlockBadge('pakar_langkah');
+            if (topicIdx === 6) unlockBadge('elak_bazir');
+
+            saveState();
+            renderTopicsNav();
+
+            if (isFirstTime) {
+                playSound('success');
+                showToast(`+${points} Mata Diperoleh!`, "Topik berjaya ditandakan selesai.", "success");
+            }
+        }
+
+        function unlockBadge(badgeId) {
+            if (!appState.badges.includes(badgeId)) {
+                appState.badges.push(badgeId);
+                const badge = BADGES_CONFIG.find(b => b.id === badgeId);
+                setTimeout(() => {
+                    playSound('badge');
+                    showToast(`Lencana Baharu: ${badge.title}!`, badge.desc, "badge");
+                }, 600);
+            }
+        }
+
+        // ==========================================
+        // 3. KANDUNGAN PENDIDIKAN ISLAM (7 TOPIK X 3 TAHAP)
+        // ==========================================
+        const TOPICS_META = [
+            { num: 1, short: "Maksud Wuduk", icon: "fa-droplet" },
+            { num: 2, short: "Kepentingan", icon: "fa-heart-pulse" },
+            { num: 3, short: "Dalil & Hukum", icon: "fa-book-quran" },
+            { num: 4, short: "6 Rukun Wuduk", icon: "fa-list-check" },
+            { num: 5, short: "Sunat Wuduk", icon: "fa-sparkles" },
+            { num: 6, short: "Langkah Wuduk", icon: "fa-person-praying" },
+            { num: 7, short: "Perkara Makruh", icon: "fa-triangle-exclamation" }
+        ];
+
+        // Data Langkah Berwuduk untuk Simulasi Interaktif (Topik 6)
+        const WUDUK_STEPS = [
+            { step: 1, title: "Membaca Basmalah & Membasuh Tangan", type: "SUNAT", color: "water", desc: "Membaca 'Bismillahirrahmanirrahim' sambil membasuh kedua-dua tapak tangan hingga pergelangan tangan sebanyak 3 kali." },
+            { step: 2, title: "Berkumur-kumur", type: "SUNAT", color: "water", desc: "Memasukkan air ke dalam mulut, mengocaknya untuk membersihkan sisa makanan, lalu meludahkannya (3 kali)." },
+            { step: 3, title: "Memasukkan Air ke Hidung (Istinsyaq)", type: "SUNAT", color: "water", desc: "Menyedut sedikit air ke dalam lubang hidung dan mengeluarkannya semula (Istinthar) sebanyak 3 kali." },
+            { step: 4, title: "Niat & Membasuh Muka", type: "RUKUN", color: "emerald", desc: "Berniat mengangkat hadas kecil ketika air mula menyentuh muka. Basuh seluruh muka dari gigi rambut hingga dagu, dan dari telinga kanan ke telinga kiri." },
+            { step: 5, title: "Membasuh Kedua-dua Tangan hingga Siku", type: "RUKUN", color: "emerald", desc: "Membasuh tangan kanan dahulu diikuti tangan kiri bermula dari hujung jari hingga melepasi siku secara menyeluruh." },
+            { step: 6, title: "Menyapu Sebahagian Kepala", type: "RUKUN", color: "emerald", desc: "Menyapu air ke atas sebahagian kulit kepala atau rambut yang berada dalam had kawasan kepala." },
+            { step: 7, title: "Menyapu Kedua-dua Telinga", type: "SUNAT", color: "water", desc: "Menyapu bahagian luar dan dalam kedua-dua telinga menggunakan air yang baharu." },
+            { step: 8, title: "Membasuh Kedua-dua Kaki hingga Buku Lali", type: "RUKUN", color: "emerald", desc: "Membasuh kaki kanan dahulu diikuti kaki kiri hingga melepasi kedua-dua buku lali, serta menyelati jari kaki." },
+            { step: 9, title: "Tertib & Membaca Doa Selepas Wuduk", type: "RUKUN & SUNAT", color: "emerald", desc: "Melakukan semua rukun mengikut urutan (Tertib - Rukun), kemudian menghadap kiblat dan membaca doa selepas wuduk (Sunat)." }
+        ];
+
+        // ==========================================
+        // 4. NAVIGASI & PAPARAN UTAMA
+        // ==========================================
+        function navigateTo(view) {
+            playSound('click');
+            document.getElementById('view-home').classList.toggle('hidden', view !== 'home');
+            document.getElementById('view-learning').classList.toggle('hidden', view !== 'learning');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToLevels() {
+            navigateTo('home');
+            setTimeout(() => {
+                document.getElementById('section-levels').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function selectAnatomy(part) {
+            playSound('click');
+            const data = {
+                kepala: {
+                    title: "3. Menyapu Sebahagian Kepala (RUKUN)",
+                    badge: "Rukun Wuduk ke-4",
+                    desc: "Wajib menyapu air sekurang-kurangnya pada sebahagian kecil kulit kepala atau rambut yang berada di dalam had kawasan kepala (bukan rambut panjang yang terjuntai keluar dari had kepala)."
+                },
+                muka: {
+                    title: "1. Membasuh Muka (RUKUN)",
+                    badge: "Rukun Wuduk ke-2 (Berserta Niat)",
+                    desc: "Had muka secara menegak ialah dari tempat tumbuh rambut di dahi hingga ke bawah dagu. Secara melintang pula dari anak telinga kanan hingga ke anak telinga kiri."
+                },
+                tangan: {
+                    title: "2. Membasuh Tangan hingga Siku (RUKUN)",
+                    badge: "Rukun Wuduk ke-3",
+                    desc: "Wajib meratakan air ke seluruh kulit tangan bermula dari hujung jari hingga melepasi siku. Pastikan tiada penghalang air seperti cat, gam atau cincin yang terlalu ketat."
+                },
+                kaki: {
+                    title: "4. Membasuh Kaki hingga Buku Lali (RUKUN)",
+                    badge: "Rukun Wuduk ke-5",
+                    desc: "Wajib meratakan air ke seluruh bahagian kaki bermula dari hujung jari kaki hingga melepasi kedua-dua buku lali (tonjolan tulang di pergelangan kaki), termasuk bahagian tumit dan celah jari."
+                }
+            };
+
+            const info = data[part];
+            document.getElementById('anatomy-title').textContent = info.title;
+            document.getElementById('anatomy-badge').textContent = info.badge;
+            document.getElementById('anatomy-desc').textContent = info.desc;
+        }
+
+        function startLevel(level) {
+            playSound('click');
+            appState.currentLevel = level;
+            appState.currentTopic = 0;
+
+            const levelNames = {
+                1: { badge: "TAHAP 1 • ASAS", title: "Penjelajah Wuduk", cls: "bg-water-100 text-water-900" },
+                2: { badge: "TAHAP 2 • SEDERHANA", title: "Pakar Wuduk", cls: "bg-emerald-100 text-emerald-900" },
+                3: { badge: "TAHAP 3 • TINGGI (KBAT)", title: "Master Wuduk", cls: "bg-gold-100 text-amber-900" }
+            };
+
+            const meta = levelNames[level];
+            const badgeEl = document.getElementById('learn-level-badge');
+            badgeEl.textContent = meta.badge;
+            badgeEl.className = `px-2.5 py-0.5 rounded-full text-xs font-extrabold ${meta.cls}`;
+            document.getElementById('learn-level-title').textContent = meta.title;
+
+            navigateTo('learning');
+            renderTopicsNav();
+            renderTopicContent();
+        }
+
+        function renderTopicsNav() {
+            const nav = document.getElementById('topics-nav');
+            const completed = appState.completedTopics[appState.currentLevel] || [];
+
+            nav.innerHTML = TOPICS_META.map((t, idx) => {
+                const isActive = idx === appState.currentTopic;
+                const isDone = completed.includes(idx);
+
+                let btnClass = "bg-white hover:bg-emerald-50 text-slate-700 border-slate-200";
+                if (isActive) {
+                    btnClass = "bg-emerald-600 text-white border-emerald-600 shadow-md scale-[1.02]";
+                } else if (isDone) {
+                    btnClass = "bg-emerald-50 text-emerald-900 border-emerald-300";
+                }
+
+                return `
+                    <button onclick="selectTopic(${idx})" class="p-3 rounded-2xl border text-left transition-all flex flex-col justify-between gap-1.5 relative ${btnClass}">
+                        <div class="flex items-center justify-between w-full">
+                            <span class="text-[11px] font-extrabold opacity-80">TOPIK ${t.num}</span>
+                            ${isDone ? `<i class="fa-solid fa-circle-check ${isActive ? 'text-gold-300' : 'text-emerald-500'} text-sm"></i>` : `<i class="fa-solid ${t.icon} opacity-60 text-xs"></i>`}
+                        </div>
+                        <span class="font-bold text-xs sm:text-sm leading-tight line-clamp-1">${t.short}</span>
+                    </button>
+                `;
+            }).join('');
+
+            // Kemas kini bar kemajuan dalam paparan belajar
+            const pct = Math.round((completed.length / 7) * 100);
+            document.getElementById('learn-progress-pct').textContent = `${pct}%`;
+            document.getElementById('learn-progress-bar').style.width = `${pct}%`;
+
+            // Kemas kini butang Sebelumnya/Seterusnya
+            document.getElementById('current-topic-num').textContent = appState.currentTopic + 1;
+            document.getElementById('btn-prev-topic').disabled = appState.currentTopic === 0;
+            const nextBtn = document.getElementById('btn-next-topic');
+            if (appState.currentTopic === 6) {
+                nextBtn.innerHTML = `<span>Tamat & Lihat Pencapaian</span> <i class="fa-solid fa-trophy text-gold-300"></i>`;
+            } else {
+                nextBtn.innerHTML = `<span>Topik Seterusnya</span> <i class="fa-solid fa-chevron-right"></i>`;
+            }
+        }
+
+        function selectTopic(idx) {
+            playSound('click');
+            appState.currentTopic = idx;
+            renderTopicsNav();
+            renderTopicContent();
+            document.getElementById('topic-content-area').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function changeTopic(delta) {
+            const newIdx = appState.currentTopic + delta;
+            if (newIdx >= 0 && newIdx <= 6) {
+                selectTopic(newIdx);
+            } else if (newIdx > 6) {
+                openAchievementsModal();
+            }
+        }
+
+        function resetCurrentLevelProgress() {
+            appState.completedTopics[appState.currentLevel] = [];
+            saveState();
+            renderTopicsNav();
+            renderTopicContent();
+            showToast("Kemajuan Ditetapkan Semula", `Kemajuan Tahap ${appState.currentLevel} telah dikosongkan untuk ulang kaji.`, "info");
+        }
+
+        // ==========================================
+        // 5. PENJANA KANDUNGAN TERBEZA (TAHAP 1, 2, 3)
+        // ==========================================
+        function renderTopicContent() {
+            const lvl = appState.currentLevel;
+            const topic = appState.currentTopic;
+            const container = document.getElementById('topic-content-area');
+
+            let html = '';
+
+            // Panggil pembina kandungan mengikut Topik (0-6) dan Tahap (1-3)
+            switch (topic) {
+                case 0: html = buildTopic1_Maksud(lvl); break;
+                case 1: html = buildTopic2_Kepentingan(lvl); break;
+                case 2: html = buildTopic3_Dalil(lvl); break;
+                case 3: html = buildTopic4_Rukun(lvl); break;
+                case 4: html = buildTopic5_Sunat(lvl); break;
+                case 5: html = buildTopic6_Langkah(lvl); break;
+                case 6: html = buildTopic7_Makruh(lvl); break;
+            }
+
+            container.innerHTML = html;
+
+            // Inisialisasi komponen interaktif khusus selepas DOM dimasukkan
+            if (topic === 5) initStepSimulator();
+        }
+
+        // ------------------------------------------
+        // TOPIK 1: MAKSUD BERWUDUK
+        // ------------------------------------------
+        function buildTopic1_Maksud(lvl) {
+            if (lvl === 1) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-water-600 uppercase tracking-wider">Topik 1 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Apakah Maksud Berwuduk?</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div class="space-y-4">
+                            <div class="p-6 rounded-3xl bg-water-50 border-2 border-water-200 space-y-3">
+                                <p class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed">
+                                    Berwuduk ialah perbuatan <span class="text-water-700 underline decoration-wavy">membasuh dan menyapu anggota tertentu</span> menggunakan air mutlak dengan niat kerana Allah SWT.
+                                </p>
+                                <p class="text-sm text-slate-600">
+                                    Kita berwuduk supaya diri kita bersih daripada <strong>hadas kecil</strong> sebelum menunaikan solat.
+                                </p>
+                            </div>
+
+                            <!-- Kotak Khas "Ingat!" -->
+                            <div class="p-5 rounded-2xl bg-gold-100 border-l-4 border-gold-500 flex items-start gap-3.5 shadow-sm">
+                                <div class="w-10 h-10 rounded-xl bg-gold-500 text-white flex items-center justify-center shrink-0 text-lg">
+                                    <i class="fa-solid fa-lightbulb"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-amber-900 text-base">INGAT!</h4>
+                                    <p class="text-sm text-amber-950 mt-0.5">
+                                        Wuduk mesti menggunakan <strong>Air Mutlak</strong> (air yang suci lagi menyucikan) seperti air paip, air hujan, air sungai dan air perigi. Air sirap atau air milo tidak sah untuk berwuduk!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ilustrasi Murid Mengambil Wuduk -->
+                        <div class="bg-gradient-to-b from-water-100 to-emerald-50 rounded-3xl p-6 flex flex-col items-center justify-center border border-water-200">
+                            <svg viewBox="0 0 260 220" class="w-60 h-auto">
+                                <!-- Dinding Ruang Wuduk -->
+                                <rect x="20" y="15" width="220" height="190" rx="20" fill="white"/>
+                                <!-- Paip Air -->
+                                <path d="M50 65 H95 V85 H80 V95 H68 V77 H50 Z" fill="#64748b"/>
+                                <rect x="85" y="55" width="14" height="6" rx="3" fill="#0ea5e9"/>
+                                <!-- Aliran Air -->
+                                <path d="M74 98 Q70 125 76 155" stroke="#38bdf8" stroke-width="5" stroke-linecap="round" stroke-dasharray="6 4"/>
+                                <!-- Murid Sopan Membasuh Tangan -->
+                                <circle cx="155" cy="85" r="28" fill="#ffedd5"/>
+                                <path d="M128 75 C128 55 182 55 182 75 Z" fill="#1e293b"/>
+                                <circle cx="145" cy="84" r="2.5" fill="#1e293b"/>
+                                <path d="M142 96 Q150 102 158 96" stroke="#b45309" stroke-width="2" fill="none"/>
+                                <path d="M120 185 C120 135 190 135 190 185 Z" fill="#10b981"/>
+                                <!-- Tangan di Bawah Air -->
+                                <path d="M130 145 L82 135" stroke="#ffedd5" stroke-width="12" stroke-linecap="round"/>
+                                <circle cx="78" cy="135" r="8" fill="#ffedd5"/>
+                            </svg>
+                            <span class="text-xs font-bold text-water-800 mt-2 bg-white px-3 py-1 rounded-full shadow-sm">
+                                Contoh: Ahmad mengambil wuduk menggunakan air paip (air mutlak)
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Misi Aktiviti Tahap 1 -->
+                    ${buildQuizBox(1, 0, "Misi Penjelajah: Pilih Jawapan Tepat!", 
+                        "Antara berikut, air manakah yang SAH digunakan untuk mengambil wuduk?",
+                        [
+                            { text: "Air paip yang bersih", correct: true, exp: "Betul! Air paip ialah air mutlak yang suci lagi menyucikan." },
+                            { text: "Air teh tarik", correct: false, exp: "Cuba lagi! Air teh tarik ialah air mutanajis/air bercampur (muqayyad) yang telah berubah sifatnya." },
+                            { text: "Air kelapa muda", correct: false, exp: "Tidak tepat. Air kelapa bukan air mutlak, jadi tidak sah untuk berwuduk." }
+                        ],
+                        "Petunjuk: Lihat semula kotak berwarna kuning bertajuk 'INGAT!'."
+                    )}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 1 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Pengertian Wuduk & Fungsi Air Mutlak</h3>
+                    </div>
+
+                    <!-- Kad Bahasa & Istilah -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white text-xs font-bold">DARI SEGI BAHASA</span>
+                            <h4 class="text-xl font-extrabold text-emerald-950">Kebersihan dan Keindahan</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Perkataan wuduk berasal daripada perkataan Arab (الْوُضُوءُ) yang bermaksud <strong>bersih, elok dan berseri-seri</strong>.
+                            </p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-water-50 border border-water-200 space-y-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-water-600 text-white text-xs font-bold">DARI SEGI ISTILAH</span>
+                            <h4 class="text-xl font-extrabold text-water-950">Membasuh & Menyapu Anggota Tertentu</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Membasuh dan menyapu anggota badan yang tertentu menggunakan <strong>air mutlak</strong> berserta <strong>niat</strong> mengikut syarat dan rukun yang ditetapkan oleh syarak.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Perbezaan Membersihkan Anggota vs Mengangkat Hadas Kecil -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="bg-slate-800 text-white px-5 py-3 font-bold text-sm">
+                            Perbandingan: Membersihkan Anggota Biasa vs Mengangkat Hadas Kecil (Wuduk)
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                            <div class="p-5 space-y-2">
+                                <h5 class="font-extrabold text-slate-800 flex items-center gap-2">
+                                    <i class="fa-solid fa-soap text-slate-400"></i> Membasuh Anggota Biasa
+                                </h5>
+                                <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5">
+                                    <li>Tujuan: Menghilangkan kotoran fizikal, peluh atau debu.</li>
+                                    <li>Tidak memerlukan niat ibadah khusus.</li>
+                                    <li>Boleh menggunakan sabun atau apa-apa jenis air bersih.</li>
+                                    <li><strong>Tidak membolehkan</strong> seseorang menunaikan solat.</li>
+                                </ul>
+                            </div>
+                            <div class="p-5 space-y-2 bg-emerald-50/40">
+                                <h5 class="font-extrabold text-emerald-900 flex items-center gap-2">
+                                    <i class="fa-solid fa-hands-praying text-emerald-600"></i> Berwuduk (Mengangkat Hadas Kecil)
+                                </h5>
+                                <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                                    <li>Tujuan: Menyucikan diri daripada <strong>hadas kecil</strong> (halangan maknawi untuk beribadah).</li>
+                                    <li>Wajib disertakan dengan <strong>niat</strong> kerana Allah SWT.</li>
+                                    <li>Mesti menggunakan <strong>air mutlak</strong> yang suci lagi menyucikan.</li>
+                                    <li><strong>Membolehkan</strong> seseorang menunaikan solat dan tawaf.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(2, 0, "Cabaran Pakar: Analisis Konsep", 
+                        "Mengapakah seseorang yang baru mandi menggunakan syampu dan sabun wangi masih TIDAK BOLEH terus menunaikan solat tanpa berwuduk?",
+                        [
+                            { text: "Kerana mandi biasa tanpa niat wuduk tidak mengangkat hadas kecil.", correct: true, exp: "Tepat sekali! Mandi biasa hanya membersihkan kotoran fizikal, manakala hadas kecil hanya terangkat dengan wuduk yang sah (atau mandi wajib)." },
+                            { text: "Kerana bau wangi syampu membatalkan wuduk.", correct: false, exp: "Kurang tepat. Bau wangi tidak membatalkan wuduk, tetapi mandi biasa tidak menggantikan rukun wuduk." },
+                            { text: "Kerana air paip di bilik mandi bukan air mutlak.", correct: false, exp: "Salah. Air paip adalah air mutlak, tetapi syarat mengangkat hadas kecil ialah melaksanakan rukun wuduk berserta niat." }
+                        ],
+                        "Petunjuk: Bandingkan tujuan membersihkan kotoran fizikal dengan mengangkat hadas kecil."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 1 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Konsep Taharah, Hadas Kecil & Najis</h3>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-gradient-to-r from-emerald-900 to-water-900 text-white space-y-3 shadow-lg">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold uppercase tracking-widest text-gold-400">Definisi Syarak Komprehensif</span>
+                            <span class="arabic-text text-xl text-emerald-200">الْوُضُوءُ</span>
+                        </div>
+                        <p class="text-sm sm:text-base text-emerald-50 leading-relaxed">
+                            Dari segi bahasa, wuduk bermaksud <em>al-hasan</em> (elok) dan <em>an-nazafah</em> (bersih). Dari segi istilah syarak dalam Mazhab Syafi'i, wuduk ialah <strong>menggunakan air mutlak pada anggota-anggota yang tertentu dimulakan dengan niat</strong> untuk mengangkat hadas kecil yang menghalang sahnya solat dan ibadah seumpamanya.
+                        </p>
+                    </div>
+
+                    <!-- Analisis Perbezaan Hadas vs Najis -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-2xl bg-white border-2 border-water-200 shadow-sm space-y-3">
+                            <div class="flex items-center gap-2 text-water-700 font-extrabold">
+                                <i class="fa-solid fa-sparkles"></i>
+                                <h4>Bersuci Daripada Hadas (Rafa' al-Hadath)</h4>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                <strong>Hadas</strong> ialah perkara maknawi (tidak nampak pada mata kasar) yang berlaku pada tubuh badan seseorang (seperti keluar angin atau tidur tidak tetap punggung) yang menghalang sahnya solat.
+                            </p>
+                            <div class="p-3 rounded-xl bg-water-50 text-xs font-semibold text-water-900">
+                                Syarat Utama: Wajib ada <strong>NIAT</strong>, mesti menggunakan <strong>Air Mutlak</strong>, dan mengikut urutan rukun.
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-2xl bg-white border-2 border-amber-200 shadow-sm space-y-3">
+                            <div class="flex items-center gap-2 text-amber-700 font-extrabold">
+                                <i class="fa-solid fa-droplet-slash"></i>
+                                <h4>Menghilangkan Najis (Izalah al-Khabath)</h4>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                <strong>Najis</strong> ialah kotoran fizikal yang nyata (seperti air kencing, darah atau tahi) yang melekat pada badan, pakaian atau tempat solat.
+                            </p>
+                            <div class="p-3 rounded-xl bg-amber-50 text-xs font-semibold text-amber-900">
+                                Syarat Utama: <strong>Tidak wajib niat</strong> (jika hilang dengan hujan, ia sudah suci), tetapi mesti hilang bau, warna dan rasa najis tersebut.
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(3, 0, "Kajian Kes Master (KBAT)", 
+                        "Situasi: Tangan kanan Daniel terkena sedikit titisan air kencing kucing (najis mutawassitah). Dia terus mengambil wuduk tanpa membasuh najis itu terlebih dahulu, lalu air wuduknya mengalir membersihkan najis tersebut. Adakah wuduk Daniel sah?",
+                        [
+                            { text: "Tidak sah basuhan anggota tersebut sehingga najis dihilangkan dahulu, maka wajib diulang basuhan tangan itu selepas najis hilang.", correct: true, exp: "Cemerlang! Dalam Mazhab Syafi'i, air yang sedikit (kurang 2 kolah) apabila bertemu najis sebelum suci tempat itu akan menjadi air mutanajis. Maka najis mesti dihilangkan terlebih dahulu sebelum membasuh anggota wuduk." },
+                            { text: "Sah sepenuhnya kerana wuduk telah mengangkat hadas dan najis serentak.", correct: false, exp: "Kurang tepat. Air wuduk yang sedikit (seperti cedokan tangan) akan menjadi mutanajis apabila menyentuh najis yang belum dibersihkan." },
+                            { text: "Sah dengan syarat dia menyapu debu tanah selepas berwuduk.", correct: false, exp: "Salah. Menyapu tanah hanya untuk najis mughallazah (anjing/babi) melalui sertu, bukan isu utama di sini." }
+                        ],
+                        "Petunjuk: Fikirkan hukum air sedikit (kurang 2 kolah) apabila terkena najis dalam fiqh Mazhab Syafi'i."
+                    )}
+                </div>`;
+            }
+        }
+
+        // ------------------------------------------
+        // TOPIK 2: KEPENTINGAN BERWUDUK
+        // ------------------------------------------
+        function buildTopic2_Kepentingan(lvl) {
+            if (lvl === 1) {
+                const items = [
+                    { icon: "fa-mosque", title: "Syarat Sah Solat", desc: "Kita mesti berwuduk supaya solat kita sah dan diterima Allah SWT." },
+                    { icon: "fa-hands-bubbles", title: "Membersihkan Badan", desc: "Membasuh muka, tangan dan kaki menghilangkan habuk dan kuman." },
+                    { icon: "fa-shield-heart", title: "Melatih Disiplin Diri", desc: "Melatih kita sentiasa menjaga kebersihan setiap hari." },
+                    { icon: "fa-book-quran", title: "Persediaan Ibadah", desc: "Menyediakan diri sebelum memegang al-Quran atau bertawaf." }
+                ];
+
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-water-600 uppercase tracking-wider">Topik 2 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Mengapa Kita Perlu Berwuduk?</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        ${items.map(i => `
+                            <div class="p-6 rounded-3xl bg-white border-2 border-water-100 hover:border-water-400 shadow-sm flex items-start gap-4 transition">
+                                <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-water-400 to-emerald-500 text-white flex items-center justify-center text-2xl shrink-0 shadow-md">
+                                    <i class="fa-solid ${i.icon}"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-extrabold text-lg text-slate-900">${i.title}</h4>
+                                    <p class="text-sm text-slate-600 mt-1 leading-relaxed">${i.desc}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${buildQuizBox(1, 1, "Misi Penjelajah: Kepentingan Wuduk", 
+                        "Apakah ibadah utama yang WAJIB didahului dengan wuduk?",
+                        [
+                            { text: "Menunaikan solat fardu dan solat sunat", correct: true, exp: "Tahniah! Tanpa wuduk, solat seseorang tidak sah." },
+                            { text: "Makan nasi bersama keluarga", correct: false, exp: "Cuba lagi. Sebelum makan kita disunatkan membasuh tangan, bukan wajib berwuduk." },
+                            { text: "Membaca buku cerita di perpustakaan", correct: false, exp: "Tidak tepat. Membaca buku cerita tidak memerlukan wuduk." }
+                        ],
+                        "Petunjuk: Lihat kad pertama yang mempunyai ikon masjid."
+                    )}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 2 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Kepentingan Wuduk dari Tiga Aspek Utama</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 rounded-3xl bg-emerald-50 border border-emerald-200 space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-600 text-white flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-kaaba"></i>
+                            </div>
+                            <h4 class="font-extrabold text-lg text-emerald-950">1. Aspek Ibadah</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Menjadi kunci sahnya ibadah solat, tawaf di Baitullah, dan menyentuh mushaf al-Quran. Ibadah yang dilakukan dalam keadaan suci akan lebih khusyuk.
+                            </p>
+                            <div class="text-xs bg-white p-3 rounded-xl text-emerald-800 font-medium">
+                                <strong>Situasi:</strong> Sebelum azan Zohor berkumandang, Aminah sudah bersiap sedia mengambil wuduk agar dapat solat di awal waktu.
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-3xl bg-water-50 border border-water-200 space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-water-600 text-white flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-hand-sparkles"></i>
+                            </div>
+                            <h4 class="font-extrabold text-lg text-water-950">2. Kebersihan Fizikal</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Anggota wuduk seperti muka, tangan dan kaki adalah bahagian paling terdedah kepada debu dan kuman. Berwuduk 5 kali sehari menyegarkan tubuh dan mencegah penyakit.
+                            </p>
+                            <div class="text-xs bg-white p-3 rounded-xl text-water-800 font-medium">
+                                <strong>Situasi:</strong> Selepas pulang dari sekolah pada waktu petang, wuduk menyegarkan semula wajah yang letih dan berpeluh.
+                            </div>
+                        </div>
+
+                        <div class="p-6 rounded-3xl bg-amber-50 border border-amber-200 space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-amber-600 text-white flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-user-check"></i>
+                            </div>
+                            <h4 class="font-extrabold text-lg text-amber-950">3. Disiplin & Kawalan Emosi</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed">
+                                Mendidik umat Islam mematuhi peraturan dan urutan (tertib). Air wuduk juga mampu meredakan perasaan marah kerana marah itu berpunca daripada api syaitan.
+                            </p>
+                            <div class="text-xs bg-white p-3 rounded-xl text-amber-800 font-medium">
+                                <strong>Situasi:</strong> Apabila berasa marah dengan rakan, berwuduk membantu menenangkan fikiran dan menyejukkan hati.
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(2, 1, "Cabaran Pakar: Aplikasi Kehidupan", 
+                        "Bagaimanakah amalan berwuduk sekurang-kurangnya lima kali sehari membantu menjaga kesihatan fizikal seorang Muslim?",
+                        [
+                            { text: "Membersihkan anggota badan yang paling kerap terdedah kepada habuk, kuman dan peluh secara berkala.", correct: true, exp: "Betul! Muka, tangan, hidung, mulut dan kaki dibasuh berkali-kali setiap hari sehingga mengurangkan risiko jangkitan kuman." },
+                            { text: "Menggantikan keperluan mandi pagi dan petang.", correct: false, exp: "Kurang tepat. Wuduk membersihkan anggota tertentu, namun kita tetap perlu mandi untuk kebersihan seluruh badan." },
+                            { text: "Menjadikan kulit kebal daripada sebarang penyakit kulit.", correct: false, exp: "Tidak tepat. Wuduk adalah langkah pencegahan dan kebersihan yang baik, bukan jaminan kekebalan mutlak." }
+                        ],
+                        "Petunjuk: Rujuk kotak ke-2 mengenai aspek Kebersihan Fizikal."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 2 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Analisis Falsafah Kebersihan Zahir & Persediaan Rohani</h3>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-slate-50 border border-slate-200 space-y-4">
+                        <p class="text-sm sm:text-base text-slate-700 leading-relaxed">
+                            Islam tidak memisahkan antara <strong>kesucian fizikal (zahir)</strong> dengan <strong>kesucian jiwa (rohani)</strong>. Sebelum seorang hamba berdiri menghadap Penciptanya (Allah SWT) dalam solat, syariat menetapkan wuduk sebagai zon peralihan daripada kesibukan duniawi kepada ketenangan ukhrawi.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div class="p-5 rounded-2xl bg-white border border-emerald-200 shadow-sm">
+                                <h4 class="font-extrabold text-emerald-800 text-base mb-2"><i class="fa-solid fa-eye mr-2"></i>Dimensi Zahir (Fisiologi)</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Membasuh hujung saraf pada wajah, tangan dan kaki merangsang peredaran darah serta menurunkan suhu badan ketika emosi tidak stabil (marah).
+                                </p>
+                            </div>
+                            <div class="p-5 rounded-2xl bg-white border border-water-200 shadow-sm">
+                                <h4 class="font-extrabold text-water-800 text-base mb-2"><i class="fa-solid fa-soul mr-2"></i>Dimensi Rohani (Spiritual)</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">
+                                    Berdasarkan hadis sahih riwayat Muslim, setiap titisan air wuduk menggugurkan dosa-dosa kecil yang dilakukan oleh mata, tangan dan kaki seorang mukmin.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(3, 1, "Penaakulan Master (KBAT)", 
+                        "Mengapakah syariat Islam mewajibkan basuhan wuduk tertumpu pada muka, tangan, kepala dan kaki, bukannya bahagian belakang badan atau perut?",
+                        [
+                            { text: "Kerana anggota tersebut paling aktif berinteraksi dengan persekitaran (terdedah kotoran) serta paling kerap terlibat dalam melakukan dosa kecil harian.", correct: true, exp: "Analisis yang sangat tepat! Dari sudut fizikal ia paling terdedah habuk, dan dari sudut rohani, mata, mulut, tangan serta kaki adalah anggota yang paling kerap tergelincir melakukan kesilapan." },
+                            { text: "Kerana bahagian badan yang lain tidak perlu dibersihkan dalam Islam.", correct: false, exp: "Salah. Islam mewajibkan kebersihan seluruh tubuh dan pakaian sebelum solat." },
+                            { text: "Kerana air mutlak tidak boleh mengenai bahagian tubuh yang tertutup pakaian.", correct: false, exp: "Tidak tepat. Ketika mandi wajib, seluruh tubuh termasuk bahagian tertutup wajib diratakan air." }
+                        ],
+                        "Petunjuk: Hubungkaitkan pendedahan anggota kepada persekitaran fizikal dan perbuatan harian."
+                    )}
+                </div>`;
+            }
+        }
+
+        // ------------------------------------------
+        // TOPIK 3: DALIL KEWAJIPAN & SUNAT BERWUDUK
+        // ------------------------------------------
+        function buildTopic3_Dalil(lvl) {
+            if (lvl === 1) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-water-600 uppercase tracking-wider">Topik 3 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Dalil Wajib & Sunat Berwuduk</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Dalil Wajib -->
+                        <div class="p-6 rounded-3xl bg-emerald-50 border-2 border-emerald-200 space-y-3">
+                            <span class="px-3 py-1 rounded-full bg-emerald-600 text-white text-xs font-extrabold">DALIL WAJIB BERWUDUK</span>
+                            <h4 class="text-lg font-extrabold text-emerald-950">Surah al-Ma'idah, Ayat 6</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-2xl border border-emerald-100">
+                                <strong>Intipati Ayat:</strong> Allah SWT memerintahkan orang yang beriman apabila hendak mendirikan solat supaya membasuh muka, membasuh kedua-dua tangan hingga ke siku, menyapu kepala, dan membasuh kedua-dua kaki hingga ke buku lali.
+                            </p>
+                            <p class="text-xs font-bold text-emerald-800">
+                                <i class="fa-solid fa-circle-info mr-1"></i> Hukum Wajib: Mesti dibuat sebelum solat. Jika tidak buat, solat tidak sah.
+                            </p>
+                        </div>
+
+                        <!-- Dalil Sunat -->
+                        <div class="p-6 rounded-3xl bg-water-50 border-2 border-water-200 space-y-3">
+                            <span class="px-3 py-1 rounded-full bg-water-600 text-white text-xs font-extrabold">DALIL SUNAT BERWUDUK</span>
+                            <h4 class="text-lg font-extrabold text-water-950">Hadis Riwayat al-Bukhari & Muslim</h4>
+                            <p class="text-sm text-slate-700 leading-relaxed bg-white p-4 rounded-2xl border border-water-100">
+                                <strong>Intipati Hadis:</strong> Rasulullah SAW bersabda kepada al-Bara' bin 'Azib r.a. supaya apabila hendak masuk ke tempat tidur, hendaklah berwuduk terlebih dahulu sebagaimana wuduk untuk mendirikan solat.
+                            </p>
+                            <p class="text-xs font-bold text-water-800">
+                                <i class="fa-solid fa-star mr-1"></i> Hukum Sunat: Dapat pahala jika dibuat sebelum tidur. Tidak berdosa jika tidak dibuat.
+                            </p>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(1, 2, "Misi Penjelajah: Wajib atau Sunat?", 
+                        "Apakah hukum berwuduk sebelum masuk tidur pada waktu malam?",
+                        [
+                            { text: "Sunat (mendapat pahala dan berada dalam keadaan suci)", correct: true, exp: "Tahniah! Berwuduk sebelum tidur adalah amalan sunat yang sangat digalakkan oleh Rasulullah SAW." },
+                            { text: "Wajib (berdosa jika tidur tanpa wuduk)", correct: false, exp: "Cuba lagi! Berwuduk hanya wajib apabila hendak menunaikan solat atau tawaf." },
+                            { text: "Makruh (tidak disukai)", correct: false, exp: "Tidak tepat. Berwuduk sebelum tidur adalah amalan yang mulia dan sunat." }
+                        ],
+                        "Petunjuk: Lihat kotak berwarna biru di sebelah kanan."
+                    )}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 3 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Huraian Dalil & Perbezaan Hukum Berwuduk</h3>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h4 class="text-lg font-extrabold text-emerald-900">1. Perintah Wuduk dalam Surah al-Ma'idah, Ayat 6</h4>
+                            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">Dalil Naqli Utama</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Dalam ayat ini, Allah SWT menyeru orang-orang beriman dengan perintah yang jelas: <em>"Apabila kamu hendak mengerjakan solat..."</em>. Para ulama fiqh menjelaskan bahawa perintah ini menetapkan <strong>kewajipan berwuduk</strong> bagi sesiapa yang berhadas kecil sebelum menunaikan solat, serta menggariskan empat anggota utama rukun wuduk mengikut tertib.
+                        </p>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+                        <div class="flex flex-wrap items-center justify-between gap-2">
+                            <h4 class="text-lg font-extrabold text-water-900">2. Anjuran Sunat Berwuduk Sebelum Tidur</h4>
+                            <span class="px-3 py-1 rounded-full bg-water-100 text-water-800 text-xs font-bold">Sahih al-Bukhari & Muslim</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Melalui hadis sahih daripada al-Bara' bin 'Azib r.a., Nabi Muhammad SAW mengajarkan adab tidur dengan berwuduk terlebih dahulu. Ini menunjukkan bahawa wuduk bukan sekadar syarat sah solat, tetapi juga satu bentuk <strong>ibadah sunat</strong> untuk mengekalkan kesucian diri.
+                        </p>
+                    </div>
+
+                    <!-- Jadual Perbandingan Keadaan Wajib vs Sunat Berwuduk -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="bg-emerald-800 text-white px-5 py-3 font-bold text-sm">
+                            Perbezaan Keadaan Wajib Berwuduk vs Sunat Berwuduk
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                            <div class="p-5 space-y-2">
+                                <h5 class="font-extrabold text-emerald-900">Keadaan WAJIB Berwuduk (Jika Berhadas Kecil)</h5>
+                                <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5">
+                                    <li>Ketika hendak mendirikan solat fardu atau solat sunat.</li>
+                                    <li>Ketika hendak melakukan tawaf di Kaabah.</li>
+                                    <li>Ketika hendak menyentuh atau membawa mushaf al-Quran.</li>
+                                </ul>
+                            </div>
+                            <div class="p-5 space-y-2 bg-water-50/40">
+                                <h5 class="font-extrabold text-water-900">Keadaan SUNAT Berwuduk</h5>
+                                <ul class="text-sm text-slate-600 space-y-1.5 list-disc pl-5">
+                                    <li>Ketika hendak masuk tidur.</li>
+                                    <li>Memperbaharui wuduk (<em>Tajdid al-Wuduk</em>) walaupun masih berwuduk untuk setiap solat fardu.</li>
+                                    <li>Ketika sedang marah untuk menenangkan diri.</li>
+                                    <li>Ketika hendak membaca al-Quran (tanpa menyentuh mushaf), berzikir atau menuntut ilmu.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(2, 2, "Cabaran Pakar: Membezakan Hukum", 
+                        "Ahmad masih mempunyai wuduk dari solat Asar. Apabila masuk waktu Maghrib, dia mengambil wuduk sekali lagi. Apakah hukum perbuatan Ahmad tersebut?",
+                        [
+                            { text: "Sunat (dinamakan Tajdid al-Wuduk dan mendapat pahala tambahan).", correct: true, exp: "Tepat sekali! Memperbaharui wuduk bagi setiap solat fardu (dengan syarat wuduk asal sudah digunakan untuk solat) adalah amalan sunat yang sangat digalakkan." },
+                            { text: "Wajib kerana satu wuduk hanya sah untuk satu waktu solat sahaja.", correct: false, exp: "Salah. Satu wuduk boleh digunakan untuk beberapa waktu solat selagi tidak terbatal." },
+                            { text: "Makruh kerana membazir masa.", correct: false, exp: "Tidak tepat. Ia bukan makruh, malah sunat selagi tidak membazirkan penggunaan air." }
+                        ],
+                        "Petunjuk: Rujuk senarai Keadaan Sunat Berwuduk di atas."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 3 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Istinbat Hukum & Klasifikasi Dalil dalam Wuduk</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-6 rounded-3xl bg-white border-2 border-emerald-200 shadow-sm space-y-3">
+                            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-extrabold">1. DALIL HUKUM BERWUDUK</span>
+                            <h4 class="font-extrabold text-slate-900 text-lg">Kewajipan Asas vs Kesunatan Umum</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Berdasarkan <strong>Surah al-Ma'idah ayat 6</strong>, kewajipan wuduk berkait rapat dengan <em>qiyam ila al-solah</em> (apabila hendak mendirikan solat) bagi orang yang berhadas. Manakala hadis al-Bara' bin 'Azib r.a. (Riwayat al-Bukhari & Muslim) menjadi dalil kesunatan berwuduk sebelum tidur sebagai persediaan rohani.
+                            </p>
+                        </div>
+
+                        <div class="p-6 rounded-3xl bg-white border-2 border-gold-400/50 shadow-sm space-y-3">
+                            <span class="px-3 py-1 rounded-full bg-gold-100 text-amber-900 text-xs font-extrabold">2. DALIL AMALAN SUNAT DI DALAM WUDUK</span>
+                            <h4 class="font-extrabold text-slate-900 text-lg">Sunnah Fi'liyyah Rasulullah SAW</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Perincian seperti membasuh tiga kali, berkumur-kumur, beristinsyaq, dan menyapu telinga tidak disebut secara langsung dalam Surah al-Ma'idah ayat 6, tetapi disabitkan melalui <strong>hadis-hadis sahih</strong> (seperti hadis Humran hamba Uthman bin Affan r.a. dalam Sahih al-Bukhari & Muslim) yang meriwayatkan tatacara lengkap wuduk Rasulullah SAW.
+                            </p>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(3, 2, "Analisis Usul Fiqh Master (KBAT)", 
+                        "Mengapakah ulama Mazhab Syafi'i menetapkan menyapu telinga sebagai SUNAT wuduk dan bukannya RUKUN, walaupun Rasulullah SAW sentiasa melakukannya ketika berwuduk?",
+                        [
+                            { text: "Kerana Surah al-Ma'idah ayat 6 hanya mewajibkan 4 anggota fizikal (muka, tangan, kepala, kaki) manakala hadis Nabi SAW menerangkan perbuatan pelengkap sebagai sunat.", correct: true, exp: "Penjelasan yang sangat bernas! Ayat al-Quran menetapkan fardu/rukun asas, manakala hadis tatacara wuduk menjadi dalil bagi perkara-perkara sunat yang menyempurnakan wuduk." },
+                            { text: "Kerana telinga dianggap sebahagian daripada anggota muka.", correct: false, exp: "Salah. Dalam Mazhab Syafi'i, telinga ialah anggota berasingan yang disunatkan menyapunya dengan air baharu." },
+                            { text: "Kerana menyapu telinga hanya dilakukan apabila telinga kotor sahaja.", correct: false, exp: "Tidak tepat. Menyapu telinga adalah sunat muakkad dalam setiap wuduk mengikut sunnah Nabi SAW." }
+                        ],
+                        "Petunjuk: Bandingkan kandungan Surah al-Ma'idah ayat 6 dengan hadis tatacara wuduk Nabi SAW."
+                    )}
+                </div>`;
+            }
+        }
+
+        // ------------------------------------------
+        // TOPIK 4: RUKUN-RUKUN WUDUK
+        // ------------------------------------------
+        function buildTopic4_Rukun(lvl) {
+            const rukuns = [
+                { num: 1, title: "Niat", icon: "fa-heart", short: "Berniat mengangkat hadas kecil dalam hati ketika air mula terkena muka.", detail: "Lafaz niat: 'Sahaja aku mengangkat hadas kecil kerana Allah Taala'. Waktu niat ialah serentak dengan permulaan basuhan muka.", boundary: "Tempatnya di dalam hati (melafazkannya dengan lidah adalah sunat untuk membantu hati).", error: "Berniat selepas selesai membasuh muka menyebabkan basuhan muka sebelumnya tidak dikira." },
+                { num: 2, title: "Membasuh Muka", icon: "fa-face-smile", short: "Membasuh seluruh muka dari dahi hingga dagu, dan telinga ke telinga.", detail: "Meratakan air ke seluruh kulit muka termasuk bulu kening, misai dan janggut yang jarang.", boundary: "Menegak: Gigi rambut di dahi hingga bawah dagu. Melintang: Anak telinga kanan hingga anak telinga kiri.", error: "Tidak meratakan air hingga ke bawah dagu atau tepi anak telinga." },
+                { num: 3, title: "Membasuh Kedua-dua Tangan hingga Siku", icon: "fa-hands", short: "Membasuh kedua-dua tangan dari hujung jari hingga melepasi siku.", detail: "Wajib meratakan air ke seluruh kulit, kuku, celah jari dan keseluruhan sendi siku.", boundary: "Bermula dari hujung jari tangan hingga melepasi kedua-dua siku.", error: "Memakai baju lengan panjang yang ketat sehingga air tidak sampai ke bahagian siku." },
+                { num: 4, title: "Menyapu Sebahagian Kepala", icon: "fa-user", short: "Menyapu air pada sebahagian kulit kepala atau rambut di had kepala.", detail: "Memadai dengan menyapu sedikit air pada bahagian kepala, namun sunat menyapu seluruh kepala.", boundary: "Kulit kepala atau rambut yang berada dalam lingkungan had kawasan kepala.", error: "Menyapu hujung rambut panjang yang terjuntai melepasi paras bahu." },
+                { num: 5, title: "Membasuh Kedua-dua Kaki hingga Buku Lali", icon: "fa-socks", short: "Membasuh kedua-dua kaki dari hujung jari hingga melepasi buku lali.", detail: "Meratakan air ke seluruh tapak kaki, tumit, celah-celah jari kaki dan kedua-dua buku lali.", boundary: "Bermula dari hujung jari kaki hingga melepasi tonjolan tulang buku lali.", error: "Bahagian belakang tumit tidak terkena air kerana tergesa-gesa di bawah paip." },
+                { num: 6, title: "Tertib", icon: "fa-arrow-down-1-9", short: "Melakukan semua rukun mengikut urutan yang betul dari nombor 1 hingga 5.", detail: "Mendahulukan yang dahulu dan mengemudiankan yang kemudian sebagaimana susunan dalam al-Quran.", boundary: "Muka -> Tangan -> Kepala -> Kaki (tidak boleh diterbalikkan).", error: "Membasuh kaki terlebih dahulu sebelum menyapu kepala atau membasuh tangan." }
+            ];
+
+            if (lvl === 1) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-water-600 uppercase tracking-wider">Topik 4 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">6 Rukun Wuduk (Wajib Dilakukan)</h3>
+                        <p class="text-sm text-slate-600 mt-1">Klik pada setiap kad untuk menghafal keenam-enam rukun wuduk!</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${rukuns.map(r => `
+                            <div class="p-5 rounded-3xl bg-white border-2 border-emerald-200 shadow-sm hover:border-emerald-500 transition space-y-2.5">
+                                <div class="flex items-center justify-between">
+                                    <span class="w-8 h-8 rounded-full bg-emerald-600 text-white font-extrabold text-sm flex items-center justify-center">${r.num}</span>
+                                    <i class="fa-solid ${r.icon} text-emerald-500 text-xl"></i>
+                                </div>
+                                <h4 class="font-extrabold text-lg text-slate-900">${r.title}</h4>
+                                <p class="text-sm text-slate-600 leading-relaxed">${r.short}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    <!-- Aktiviti Susun Urutan 6 Rukun Wuduk -->
+                    ${buildRukunOrderGame(1)}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 4 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Perincian 6 Rukun & Sempadan Anggota</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        ${rukuns.map(r => `
+                            <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm space-y-2">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="px-2.5 py-1 rounded-lg bg-emerald-600 text-white font-extrabold text-xs">RUKUN ${r.num}</span>
+                                    <h4 class="font-extrabold text-base text-slate-900">${r.title}</h4>
+                                </div>
+                                <p class="text-sm text-slate-700 leading-relaxed">${r.detail}</p>
+                                <div class="p-3 rounded-xl bg-water-50 border border-water-100 text-xs text-water-900">
+                                    <strong>Sempadan / Had:</strong> ${r.boundary}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${buildQuizBox(2, 3, "Cabaran Pakar: Sempadan Anggota Wuduk", 
+                        "Manakah antara berikut merupakan had sempadan MUKA yang wajib dibasuh ketika berwuduk?",
+                        [
+                            { text: "Dari tempat tumbuh rambut di dahi hingga ke bawah dagu, dan dari anak telinga kanan ke anak telinga kiri.", correct: true, exp: "Tepat sekali! Itulah sempadan muka secara menegak dan melintang yang wajib diratakan air." },
+                            { text: "Dari tengah dahi hingga ke atas bibir sahaja.", correct: false, exp: "Salah. Bahagian dagu dan pipi juga termasuk dalam kawasan muka yang wajib dibasuh." },
+                            { text: "Dari ubun-ubun kepala hingga ke bahagian leher.", correct: false, exp: "Tidak tepat. Ubun-ubun adalah bahagian kepala (disapu), manakala leher bukan rukun wuduk." }
+                        ],
+                        "Petunjuk: Semak Rukun 2 (Membasuh Muka) pada kad di atas."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 4 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Syarat Pelaksanaan Rukun & Analisis Kecacatan Wuduk</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        ${rukuns.map(r => `
+                            <div class="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-4 items-center">
+                                <div class="lg:col-span-4 flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-emerald-700 text-white font-extrabold flex items-center justify-center shrink-0">${r.num}</div>
+                                    <div>
+                                        <h4 class="font-extrabold text-slate-900">${r.title}</h4>
+                                        <span class="text-xs font-semibold text-emerald-600">Mazhab Syafi'i</span>
+                                    </div>
+                                </div>
+                                <div class="lg:col-span-4 text-xs sm:text-sm text-slate-700">
+                                    <strong>Had & Syarat:</strong> ${r.boundary}
+                                </div>
+                                <div class="lg:col-span-4 p-3 rounded-xl bg-rose-50 border border-rose-100 text-xs text-rose-900">
+                                    <strong><i class="fa-solid fa-circle-exclamation mr-1"></i>Risiko Tidak Sah:</strong> ${r.error}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${buildQuizBox(3, 3, "Kajian Kes Master (KBAT)", 
+                        "Situasi: Aisyah mempunyai rambut yang panjang melepasi bahu. Ketika sampai ke rukun ke-4, dia hanya menyapu air pada hujung rambutnya yang berada di paras bahu supaya tudungnya tidak basah. Apakah hukum wuduk Aisyah?",
+                        [
+                            { text: "Tidak sah, kerana rambut yang disapu berada di luar lingkungan had kepala.", correct: true, exp: "Cemerlang! Dalam Mazhab Syafi'i, sapuan kepala mestilah mengenai kulit kepala atau rambut yang masih berada dalam lingkungan had kepala." },
+                            { text: "Sah, kerana rambut itu tumbuh daripada kulit kepalanya.", correct: false, exp: "Tidak tepat. Walaupun rambut asal dari kepala, bahagian yang terjuntai keluar dari had kepala tidak sah disapu sebagai ganti rukun kepala." },
+                            { text: "Sah, tetapi hukumnya makruh.", correct: false, exp: "Salah. Jika rukun tidak sempurna, wuduk menjadi tidak sah (bukan sekadar makruh)." }
+                        ],
+                        "Petunjuk: Lihat kotak risiko pada Rukun 4 (Menyapu Sebahagian Kepala)."
+                    )}
+                </div>`;
+            }
+        }
+
+        // Permainan Interaktif Susun Urutan 6 Rukun (Untuk Tahap 1 Topik 4)
+        let rukunUserOrder = [];
+        function buildRukunOrderGame(lvl) {
+            const shuffled = [
+                { id: 3, text: "Membasuh tangan hingga siku" },
+                { id: 1, text: "Niat" },
+                { id: 6, text: "Tertib" },
+                { id: 2, text: "Membasuh muka" },
+                { id: 5, text: "Membasuh kaki hingga buku lali" },
+                { id: 4, text: "Menyapu sebahagian kepala" }
+            ];
+            rukunUserOrder = [];
+
+            return `
+            <div class="p-6 rounded-3xl bg-gradient-to-br from-emerald-50 to-water-50 border-2 border-emerald-200 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-lg text-emerald-950"><i class="fa-solid fa-gamepad mr-2 text-emerald-600"></i>Misi Susun 6 Rukun Wuduk!</h4>
+                    <button onclick="resetRukunGame()" class="text-xs font-bold text-slate-600 hover:text-emerald-700 underline">Set Semula</button>
+                </div>
+                <p class="text-sm text-slate-600">Klik butang rukun di bawah mengikut urutan yang betul dari <strong>pertama (1) hingga keenam (6)</strong>:</p>
+                
+                <!-- Pilihan Butang -->
+                <div id="rukun-choices" class="flex flex-wrap gap-2.5">
+                    ${shuffled.map(item => `
+                        <button id="rukun-btn-${item.id}" onclick="pickRukunOrder(${item.id}, '${item.text}')" class="px-4 py-2.5 rounded-xl bg-white hover:bg-emerald-600 hover:text-white border border-slate-300 font-bold text-xs sm:text-sm shadow-sm transition">
+                            ${item.text}
+                        </button>
+                    `).join('')}
+                </div>
+
+                <!-- Kotak Jawapan Tersusun -->
+                <div id="rukun-selected-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 min-h-[50px] p-3 rounded-2xl bg-white/70 border border-dashed border-emerald-300">
+                    <span class="text-xs text-slate-400 italic col-span-full text-center py-2">Klik pilihan di atas untuk mula menyusun...</span>
+                </div>
+
+                <div id="rukun-feedback" class="hidden p-4 rounded-2xl text-sm font-bold"></div>
+            </div>`;
+        }
+
+        function pickRukunOrder(id, text) {
+            playSound('click');
+            if (rukunUserOrder.some(x => x.id === id)) return;
+            rukunUserOrder.push({ id, text });
+            
+            const btn = document.getElementById(`rukun-btn-${id}`);
+            if (btn) btn.classList.add('opacity-30', 'pointer-events-none');
+
+            const listEl = document.getElementById('rukun-selected-list');
+            listEl.innerHTML = rukunUserOrder.map((item, idx) => `
+                <div class="px-3 py-2 rounded-xl bg-emerald-100 text-emerald-900 text-xs font-extrabold flex items-center gap-2">
+                    <span class="w-5 h-5 rounded-full bg-emerald-600 text-white flex items-center justify-center text-[10px]">${idx + 1}</span>
+                    <span>${item.text}</span>
+                </div>
+            `).join('');
+
+            if (rukunUserOrder.length === 6) {
+                const isCorrect = rukunUserOrder.every((item, idx) => item.id === idx + 1);
+                const fb = document.getElementById('rukun-feedback');
+                fb.classList.remove('hidden');
+                if (isCorrect) {
+                    fb.className = "p-4 rounded-2xl text-sm font-bold bg-emerald-600 text-white";
+                    fb.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i>Tahniah! Betul! Anda berjaya menyusun keenam-enam rukun wuduk mengikut tertib!`;
+                    awardPointsAndCompletion(1, 3, 30);
+                } else {
+                    playSound('error');
+                    fb.className = "p-4 rounded-2xl text-sm font-bold bg-rose-100 text-rose-900 border border-rose-300";
+                    fb.innerHTML = `<i class="fa-solid fa-circle-xmark mr-2"></i>Cuba lagi! Susunan belum tepat. Petunjuk: Mulakan dengan Niat, diikuti Muka, Tangan, Kepala, Kaki dan diakhiri dengan Tertib.`;
+                }
+            }
+        }
+
+        function resetRukunGame() {
+            playSound('click');
+            rukunUserOrder = [];
+            [1,2,3,4,5,6].forEach(id => {
+                const btn = document.getElementById(`rukun-btn-${id}`);
+                if (btn) btn.classList.remove('opacity-30', 'pointer-events-none');
+            });
+            document.getElementById('rukun-selected-list').innerHTML = `<span class="text-xs text-slate-400 italic col-span-full text-center py-2">Klik pilihan di atas untuk mula menyusun...</span>`;
+            document.getElementById('rukun-feedback').classList.add('hidden');
+        }
+
+        // ------------------------------------------
+        // TOPIK 5: SUNAT-SUNAT WUDUK
+        // ------------------------------------------
+        function buildTopic5_Sunat(lvl) {
+            const sunats = [
+                { icon: "fa-comment-dots", title: "Membaca Basmalah", desc: "Membaca 'Bismillahirrahmanirrahim' pada permulaan wuduk." },
+                { icon: "fa-hands-wash", title: "Membasuh Kedua Tapak Tangan", desc: "Membasuh tapak tangan hingga pergelangan sebelum berkumur." },
+                { icon: "fa-tooth", title: "Bersiwak & Berkumur-kumur", desc: "Membersihkan gigi dan mengocak air di dalam mulut." },
+                { icon: "fa-wind", title: "Memasukkan Air ke Hidung", desc: "Menyedut sedikit air ke hidung (Istinsyaq) dan mengeluarkannya (Istinthar)." },
+                { icon: "fa-repeat", title: "Membasuh 3 Kali", desc: "Mengulangi setiap basuhan dan sapuan sebanyak tiga kali." },
+                { icon: "fa-ear-listen", title: "Menyapu Kedua-dua Telinga", desc: "Menyapu bahagian luar dan dalam telinga menggunakan air baharu." },
+                { icon: "fa-arrow-right-long", title: "Mendahulukan Anggota Kanan", desc: "Memulakan basuhan pada tangan kanan dan kaki kanan dahulu." },
+                { icon: "fa-hands-praying", title: "Membaca Doa Selepas Wuduk", desc: "Menghadap kiblat dan membaca doa selepas selesai berwuduk." }
+            ];
+
+            if (lvl === 1) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-water-600 uppercase tracking-wider">Topik 5 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Amalan Sunat Ketika Berwuduk</h3>
+                        <p class="text-sm text-slate-600 mt-1">Perkara sunat menambah pahala wuduk kita. Jika terlupa, wuduk tetap sah!</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        ${sunats.map(s => `
+                            <div class="p-5 rounded-2xl bg-water-50/70 border border-water-200 space-y-2">
+                                <div class="w-11 h-11 rounded-xl bg-water-500 text-white flex items-center justify-center text-lg shadow-sm">
+                                    <i class="fa-solid ${s.icon}"></i>
+                                </div>
+                                <h4 class="font-extrabold text-base text-slate-900">${s.title}</h4>
+                                <p class="text-xs text-slate-600 leading-relaxed">${s.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${buildQuizBox(1, 4, "Misi Penjelajah: Kenali Sunat Wuduk", 
+                        "Manakah antara berikut merupakan amalan SUNAT ketika berwuduk?",
+                        [
+                            { text: "Berkumur-kumur dan membasuh anggota sebanyak 3 kali", correct: true, exp: "Tahniah! Betul! Berkumur-kumur dan membasuh 3 kali adalah amalan sunat yang sangat digalakkan." },
+                            { text: "Membasuh muka", correct: false, exp: "Cuba lagi! Membasuh muka ialah RUKUN wuduk (wajib), bukan sunat." },
+                            { text: "Niat berwuduk", correct: false, exp: "Tidak tepat. Niat ialah rukun pertama wuduk yang wajib dilakukan." }
+                        ],
+                        "Petunjuk: Rujuk kad ikon berwarna biru di atas."
+                    )}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 5 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Faedah Amalan Sunat & Perbandingan dengan Rukun</h3>
+                    </div>
+
+                    <!-- Jadual Perbandingan Rukun vs Sunat -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="bg-slate-800 text-white px-5 py-3 font-bold text-sm">
+                            Jadual Perbandingan: Rukun Wuduk vs Sunat Wuduk
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-100 text-slate-700 font-bold">
+                                    <tr>
+                                        <th class="p-4">Aspek</th>
+                                        <th class="p-4 text-emerald-800">Rukun Wuduk (6 Perkara)</th>
+                                        <th class="p-4 text-water-800">Sunat Wuduk</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-200">
+                                    <tr>
+                                        <td class="p-4 font-bold">Hukum Pelaksanaan</td>
+                                        <td class="p-4">Wajib dilakukan kesemuanya.</td>
+                                        <td class="p-4">Digalakkan (mendapat pahala tambahan).</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold">Kesan Jika Ditinggalkan</td>
+                                        <td class="p-4 text-rose-700 font-semibold">Wuduk TIDAK SAH (batal).</td>
+                                        <td class="p-4 text-emerald-700 font-semibold">Wuduk TETAP SAH, tetapi rugi pahala sunat.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-4 font-bold">Contoh Amalan</td>
+                                        <td class="p-4">Niat, basuh muka, tangan hingga siku, sapu kepala, basuh kaki hingga buku lali, tertib.</td>
+                                        <td class="p-4">Baca Basmalah, basuh tapak tangan, kumur, istinsyaq, sapu telinga, basuh 3 kali, doa.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(2, 4, "Cabaran Pakar: Pengelasan Hukum", 
+                        "Fatimah mengambil wuduk dengan tergesa-gesa kerana waktu Subuh hampir habis. Dia hanya membasuh setiap anggota rukun sebanyak SEKALI sahaja tanpa berkumur dan tanpa menyapu telinga. Apakah status wuduk Fatimah?",
+                        [
+                            { text: "Sah wuduknya kerana semua 6 rukun telah dilaksanakan dengan sempurna.", correct: true, exp: "Tepat sekali! Berkumur, menyapu telinga dan basuhan ke-2 serta ke-3 adalah sunat. Apabila kesemua rukun dilakukan sekali dengan rata, wuduknya tetap sah." },
+                            { text: "Tidak sah kerana dia tidak menyapu kedua-dua telinga.", correct: false, exp: "Kurang tepat. Menyapu telinga adalah amalan sunat, bukan rukun wuduk." },
+                            { text: "Tidak sah kerana basuhan wajib mesti 3 kali.", correct: false, exp: "Salah. Yang wajib ialah sekali basuhan yang rata; kali ke-2 dan ke-3 adalah sunat." }
+                        ],
+                        "Petunjuk: Lihat baris 'Kesan Jika Ditinggalkan' pada jadual perbandingan di atas."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 5 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Klasifikasi Sunat Wuduk & Hikmah Mengikuti Sunnah</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div class="p-5 rounded-2xl bg-white border border-emerald-200 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-emerald-100 text-emerald-800 text-xs font-bold">1. SUNAT BERKAITAN ANGGOTA</span>
+                            <h4 class="font-extrabold text-slate-900">Penyucian Maksimum</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Bersiwak, berkumur, istinsyaq (memasukkan air ke hidung), menyapu seluruh kepala, menyapu telinga, serta menyelati janggut tebal dan celah jari tangan/kaki (<em>takhlil</em>).
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white border border-water-200 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-water-100 text-water-800 text-xs font-bold">2. SUNAT BERKAITAN URUTAN</span>
+                            <h4 class="font-extrabold text-slate-900">Kesempurnaan Bilangan & Turutan</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Mendahulukan anggota kanan berbanding kiri (<em>tayamun</em>), mengulangi basuhan dan sapuan sebanyak 3 kali (<em>tathlith</em>), serta berturut-turut tanpa sela masa lama (<em>muwalah</em>).
+                            </p>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-white border border-amber-200 shadow-sm space-y-2">
+                            <span class="px-2.5 py-1 rounded-lg bg-amber-100 text-amber-800 text-xs font-bold">3. SUNAT BERKAITAN ADAB</span>
+                            <h4 class="font-extrabold text-slate-900">Penghayatan Spiritual</h4>
+                            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                                Menghadap kiblat, membaca Basmalah di awal, tidak bercakap perkara sia-sia ketika berwuduk, berjimat cermat menggunakan air, dan membaca doa selepas wuduk.
+                            </p>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(3, 4, "Cabaran Master (KBAT)", 
+                        "Apakah kepentingan utama amalan 'Muwalah' (berturut-turut membasuh anggota tanpa menunggu anggota sebelumnya kering) dalam fiqh Mazhab Syafi'i?",
+                        [
+                            { text: "Ia sunat muakkad bagi menjaga kesatuan ibadah wuduk, namun dalam Mazhab Syafi'i wuduk tetap sah jika terhenti seketika selagi niat tidak terbatal.", correct: true, exp: "Cemerlang! Dalam Mazhab Syafi'i, muwalah adalah sunat (berbeza dengan Mazhab Maliki yang mewajibkannya), dan sangat penting untuk memastikan kekhusyukan serta kelancaran wuduk." },
+                            { text: "Ia merupakan rukun ke-7 wuduk yang membatalkan wuduk jika ditinggalkan.", correct: false, exp: "Salah. Rukun wuduk hanya ada 6 perkara." },
+                            { text: "Ia hanya disunatkan ketika musim sejuk sahaja.", correct: false, exp: "Tidak tepat. Muwalah disunatkan pada setiap masa ketika berwuduk." }
+                        ],
+                        "Petunjuk: Lihat kotak ke-2 mengenai Sunat Berkaitan Urutan."
+                    )}
+                </div>`;
+            }
+        }
+
+        // ------------------------------------------
+        // TOPIK 6: LANGKAH-LANGKAH BERWUDUK (SIMULATOR)
+        // ------------------------------------------
+        let currentSimStep = 0;
+
+        function buildTopic6_Langkah(lvl) {
+            const extraNote = lvl === 1 
+                ? "Tekan butang 'Langkah Seterusnya' untuk melihat cara berwuduk dari mula hingga akhir!"
+                : lvl === 2 
+                ? "Perhatikan label warna RUKUN (Hijau) dan SUNAT (Biru). Elakkan kesilapan lazim seperti tidak meratakan air hingga ke siku dan buku lali."
+                : "Analisis prosedur wuduk secara sistematik. Sekiranya terdapat bahagian anggota rukun yang tertinggal (kering), wajib membasuh semula bahagian tersebut dan mengulangi anggota rukun selepasnya bagi menjaga TERTIB.";
+
+            return `
+            <div class="space-y-8">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 6 • Simulasi Langkah Wuduk</span>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Panduan Langkah Demi Langkah Berwuduk</h3>
+                    <p class="text-sm text-slate-600 mt-1">${extraNote}</p>
+                </div>
+
+                <!-- Simulator Interaktif Langkah Wuduk -->
+                <div class="bg-gradient-to-br from-slate-50 to-water-50/60 rounded-3xl p-5 sm:p-8 border-2 border-water-200 shadow-inner space-y-6">
+                    <!-- Penunjuk Nombor Langkah 1-9 -->
+                    <div id="sim-dots" class="flex flex-wrap justify-center gap-2">
+                        <!-- Dijana oleh initStepSimulator -->
+                    </div>
+
+                    <!-- Kad Paparan Langkah Semasa -->
+                    <div id="sim-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-md border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                        <!-- Dijana oleh updateSimulatorUI -->
+                    </div>
+
+                    <!-- Butang Kawalan Simulator -->
+                    <div class="flex items-center justify-between pt-2">
+                        <button id="sim-prev" onclick="moveSimStep(-1)" class="px-5 py-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-300 text-slate-700 font-bold text-sm transition disabled:opacity-40">
+                            <i class="fa-solid fa-arrow-left mr-1.5"></i> Sebelumnya
+                        </button>
+                        <span id="sim-counter" class="text-xs sm:text-sm font-extrabold text-slate-600">Langkah 1 / 9</span>
+                        <button id="sim-next" onclick="moveSimStep(1)" class="btn-push px-6 py-2.5 rounded-xl bg-water-600 hover:bg-water-500 text-white font-bold text-sm shadow-btn-3d-blue transition">
+                            Seterusnya <i class="fa-solid fa-arrow-right ml-1.5"></i>
+                        </button>
+                    </div>
+                </div>
+
+                ${lvl === 3 ? `
+                <div class="p-6 rounded-2xl bg-amber-50 border border-amber-200 space-y-2">
+                    <h4 class="font-extrabold text-amber-900 text-base"><i class="fa-solid fa-wrench mr-2"></i>Prosedur Membetulkan Kesilapan (Mazhab Syafi'i)</h4>
+                    <p class="text-sm text-amber-950 leading-relaxed">
+                        Jika selepas selesai membasuh kaki, seseorang menyedari terdapat bahagian kering pada <strong>siku kanannya</strong> (Rukun ke-3), maka dia wajib: (1) Membasuh semula siku kanannya hingga rata, (2) Menyapu semula sebahagian kepala (Rukun ke-4), dan (3) Membasuh semula kedua-dua kaki (Rukun ke-5) supaya syarat <strong>Tertib</strong> terpenuhi.
+                    </p>
+                </div>` : ''}
+
+                ${buildQuizBox(lvl, 5, "Misi Langkah Wuduk", 
+                    lvl === 3 
+                        ? "Selepas selesai berwuduk, Hafiz mendapati masih ada kesan cat kering pada kuku jari telunjuk kanannya. Dia mengikis cat itu hingga hilang. Apakah tindakan seterusnya yang wajib dilakukan?"
+                        : "Selepas membasuh kedua-dua tangan hingga ke siku, apakah langkah RUKUN yang seterusnya?",
+                    lvl === 3 ? [
+                        { text: "Membasuh semula tangan kanan, menyapu sebahagian kepala, dan membasuh kedua-dua kaki demi menjaga tertib.", correct: true, exp: "Tepat sekali! Kerana kecacatan berlaku pada rukun tangan, maka rukun tangan dan semua rukun selepasnya (kepala dan kaki) wajib diulangi mengikut urutan." },
+                        { text: "Membasuh jari telunjuk kanan itu sahaja sudah memadai.", correct: false, exp: "Salah dalam Mazhab Syafi'i. Jika hanya membasuh tangan tanpa mengulangi kepala dan kaki, tertib antara tangan, kepala dan kaki akan terbatal." },
+                        { text: "Tidak perlu buat apa-apa kerana cat itu sangat kecil.", correct: false, exp: "Tidak tepat. Cat menghalang air sampai ke kulit/kuku, menyebabkan rukun basuhan tangan tidak sempurna." }
+                    ] : [
+                        { text: "Menyapu sebahagian kepala", correct: true, exp: "Tahniah! Betul! Selepas membasuh tangan hingga siku, rukun seterusnya ialah menyapu sebahagian kepala." },
+                        { text: "Membasuh kedua-dua kaki hingga buku lali", correct: false, exp: "Cuba lagi! Membasuh kaki adalah rukun selepas menyapu kepala." },
+                        { text: "Membasuh muka", correct: false, exp: "Tidak tepat. Membasuh muka dilakukan sebelum membasuh tangan." }
+                    ],
+                    "Petunjuk: Cuba tekan butang Seterusnya pada simulator langkah di atas hingga Langkah 9!"
+                )}
+            </div>`;
+        }
+
+        function initStepSimulator() {
+            currentSimStep = 0;
+            updateSimulatorUI();
+        }
+
+        function moveSimStep(delta) {
+            playSound('click');
+            const next = currentSimStep + delta;
+            if (next >= 0 && next < WUDUK_STEPS.length) {
+                currentSimStep = next;
+                updateSimulatorUI();
+                if (currentSimStep === WUDUK_STEPS.length - 1) {
+                    unlockBadge('pakar_langkah');
+                }
+            }
+        }
+
+        function jumpSimStep(idx) {
+            playSound('click');
+            currentSimStep = idx;
+            updateSimulatorUI();
+        }
+
+        function updateSimulatorUI() {
+            const dotsEl = document.getElementById('sim-dots');
+            const cardEl = document.getElementById('sim-card');
+            if (!dotsEl || !cardEl) return;
+
+            dotsEl.innerHTML = WUDUK_STEPS.map((s, i) => `
+                <button onclick="jumpSimStep(${i})" class="w-8 h-8 rounded-full text-xs font-extrabold transition ${i === currentSimStep ? 'bg-water-600 text-white scale-110 shadow-md' : 'bg-white text-slate-600 border border-slate-300 hover:bg-water-100'}">
+                    ${s.step}
+                </button>
+            `).join('');
+
+            const stepData = WUDUK_STEPS[currentSimStep];
+            const isRukun = stepData.type.includes("RUKUN");
+            const badgeCls = isRukun ? "bg-emerald-100 text-emerald-800 border-emerald-300" : "bg-water-100 text-water-800 border-water-300";
+
+            cardEl.innerHTML = `
+                <div class="md:col-span-4 flex flex-col items-center justify-center bg-gradient-to-br from-water-50 to-emerald-50 rounded-2xl p-6 border border-water-100">
+                    <div class="w-20 h-20 rounded-full bg-white shadow-md flex items-center justify-center text-3xl ${isRukun ? 'text-emerald-600' : 'text-water-600'} font-extrabold border-4 ${isRukun ? 'border-emerald-200' : 'border-water-200'}">
+                        ${stepData.step}
+                    </div>
+                    <span class="mt-3 px-3 py-1 rounded-full text-xs font-extrabold border ${badgeCls}">
+                        ${stepData.type}
+                    </span>
+                </div>
+                <div class="md:col-span-8 space-y-3">
+                    <h4 class="text-xl sm:text-2xl font-extrabold text-slate-900">${stepData.title}</h4>
+                    <p class="text-sm sm:text-base text-slate-700 leading-relaxed">${stepData.desc}</p>
+                </div>
+            `;
+
+            document.getElementById('sim-counter').textContent = `Langkah ${currentSimStep + 1} / ${WUDUK_STEPS.length}`;
+            document.getElementById('sim-prev').disabled = currentSimStep === 0;
+            document.getElementById('sim-next').disabled = currentSimStep === WUDUK_STEPS.length - 1;
+        }
+
+        // ------------------------------------------
+        // TOPIK 7: PERKARA MAKRUH KETIKA BERWUDUK
+        // ------------------------------------------
+        function buildTopic7_Makruh(lvl) {
+            const makruhs = [
+                { icon: "fa-faucet-drip", title: "Membazir Menggunakan Air", desc: "Membuka paip air terlalu deras atau membasuh melebihi 3 kali tanpa keperluan." },
+                { icon: "fa-comments", title: "Bercakap Perkara Sia-sia", desc: "Berbual kosong atau bergurau senda semasa sedang mengambil wuduk tanpa hajat." },
+                { icon: "fa-hand-spock", title: "Menampar Air ke Muka", desc: "Menghempas atau menampar air dengan kuat ke muka sehingga terpercik." },
+                { icon: "fa-hand-holding-hand", title: "Meminta Bantuan Tanpa Uzur", desc: "Meminta orang lain menjiruskan air wuduk sedangkan diri sendiri sihat dan mampu." },
+                { icon: "fa-arrow-left", title: "Mendahulukan Anggota Kiri", desc: "Memulakan basuhan tangan kiri atau kaki kiri sebelum bahagian kanan." }
+            ];
+
+            if (lvl === 1) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 7 • Penjelajah Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Perkara Makruh Ketika Berwuduk</h3>
+                        <p class="text-sm text-slate-600 mt-1">Makruh bermaksud perbuatan yang <strong>tidak disukai</strong>. Jika dibuat, wuduk masih sah tetapi pahala berkurang.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                        ${makruhs.map(m => `
+                            <div class="p-5 rounded-2xl bg-amber-50/70 border-2 border-amber-200 space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center text-lg">
+                                        <i class="fa-solid ${m.icon}"></i>
+                                    </div>
+                                    <span class="text-[11px] font-extrabold text-amber-800 bg-amber-200/70 px-2.5 py-0.5 rounded-full">ELAKKAN</span>
+                                </div>
+                                <h4 class="font-extrabold text-base text-slate-900">${m.title}</h4>
+                                <p class="text-xs text-slate-700 leading-relaxed">${m.desc}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+
+                    ${buildQuizBox(1, 6, "Misi Penjelajah: Elak Perkara Makruh", 
+                        "Apakah yang perlu kita lakukan apabila melihat paip air di tempat wuduk terbuka terlalu kuat?",
+                        [
+                            { text: "Perlahankan aliran air paip supaya tidak berlaku pembaziran.", correct: true, exp: "Tahniah! Betul! Membazir air ketika berwuduk adalah perbuatan makruh yang mesti dielakkan." },
+                            { text: "Biarkan sahaja air mengalir deras supaya cepat siap.", correct: false, exp: "Cuba lagi! Islam melarang pembaziran air walaupun berada di tepi sungai yang mengalir." },
+                            { text: "Membasuh muka sebanyak 10 kali.", correct: false, exp: "Tidak tepat. Membasuh melebihi 3 kali tanpa keperluan adalah makruh." }
+                        ],
+                        "Petunjuk: Lihat kad pertama yang mempunyai ikon paip air."
+                    )}
+                </div>`;
+            } 
+            else if (lvl === 2) {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-emerald-600 uppercase tracking-wider">Topik 7 • Pakar Wuduk</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Kesan Pembaziran Air & Perbezaan Makruh vs Batal Wuduk</h3>
+                    </div>
+
+                    <!-- Perbezaan Makruh vs Batal Wuduk -->
+                    <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div class="bg-amber-700 text-white px-5 py-3 font-bold text-sm">
+                            Jangan Keliru! Perbezaan Perkara MAKRUH vs Perkara MEMBATALKAN Wuduk
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200">
+                            <div class="p-5 space-y-2 bg-amber-50/40">
+                                <h5 class="font-extrabold text-amber-900">Perkara MAKRUH Ketika Berwuduk</h5>
+                                <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                                    <li><strong>Status Wuduk:</strong> Wuduk <strong>TETAP SAH</strong> dan boleh digunakan untuk solat.</li>
+                                    <li><strong>Kesan:</strong> Mengurangkan pahala kesempurnaan wuduk dan menyalahi adab sunnah.</li>
+                                    <li><strong>Contoh:</strong> Membazir air, bercakap kosong, mendahulukan anggota kiri, membasuh lebih 3 kali.</li>
+                                </ul>
+                            </div>
+                            <div class="p-5 space-y-2 bg-rose-50/40">
+                                <h5 class="font-extrabold text-rose-900">Perkara MEMBATALKAN Wuduk</h5>
+                                <ul class="text-sm text-slate-700 space-y-1.5 list-disc pl-5">
+                                    <li><strong>Status Wuduk:</strong> Wuduk <strong>TERBATAL</strong> dan wajib berwuduk semula untuk solat.</li>
+                                    <li><strong>Kesan:</strong> Kembali berada dalam keadaan hadas kecil.</li>
+                                    <li><strong>Contoh:</strong> Keluar sesuatu daripada qubul atau dubur (kentut/buang air), tidur tidak tetap punggung, hilang akal, bersentuhan kulit lelaki dan perempuan ajnabi tanpa lapik.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(2, 6, "Cabaran Pakar: Analisis Hukum", 
+                        "Semasa sedang mengambil wuduk, Amir berbual-bual dengan rakannya tentang perlawanan bola sepak semalam. Adakah wuduk Amir terbatal?",
+                        [
+                            { text: "Tidak batal, wuduknya tetap sah tetapi perbuatan bercakap kosong itu hukumnya makruh.", correct: true, exp: "Tepat sekali! Bercakap ketika berwuduk tidak membatalkan wuduk, namun ia makruh kerana menghilangkan kekhusyukan." },
+                            { text: "Ya, wuduknya terbatal serta-merta dan wajib diulang dari awal.", correct: false, exp: "Salah. Bercakap bukanlah perkara yang membatalkan wuduk." },
+                            { text: "Harus dan mendapat pahala tambahan.", correct: false, exp: "Tidak tepat. Disunatkan diam dan menumpukan perhatian ketika berwuduk." }
+                        ],
+                        "Petunjuk: Rujuk kotak perbandingan antara Perkara Makruh dan Perkara Membatalkan Wuduk."
+                    )}
+                </div>`;
+            } 
+            else {
+                return `
+                <div class="space-y-8">
+                    <div class="border-b border-slate-100 pb-4">
+                        <span class="text-xs font-extrabold text-amber-600 uppercase tracking-wider">Topik 7 • Master Wuduk (KBAT)</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Analisis Fiqh Mazhab Syafi'i: Penilaian Hukum & Situasi</h3>
+                    </div>
+
+                    <div class="p-6 rounded-3xl bg-white border border-slate-200 shadow-sm space-y-4">
+                        <h4 class="font-extrabold text-slate-900 text-lg">Faktor Sesuatu Perbuatan Dihukumkan Makruh dalam Wuduk</h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-700">
+                            <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+                                <strong>1. Menyalahi Sunnah & Adab Ibadah:</strong> Seperti mendahulukan anggota kiri (<em>tayasur</em>) atau menampar air ke wajah yang menghilangkan ketenangan ibadah.
+                            </div>
+                            <div class="p-4 rounded-2xl bg-water-50 border border-water-200">
+                                <strong>2. Elemen Pembaziran (Israf):</strong> Rasulullah SAW menegur Sa'ad bin Abi Waqqas r.a. agar tidak membazir air ketika berwuduk sekalipun berada di tepi sungai yang mengalir deras (Riwayat Ahmad & Ibn Majah).
+                            </div>
+                        </div>
+                    </div>
+
+                    ${buildQuizBox(3, 6, "Cabaran Akhir Master Wuduk (KBAT)", 
+                        "Situasi: Zulkifli menggunakan air yang disediakan khas oleh pihak masjid untuk berwuduk secara berlebihan (membuka paip sepenuhnya dan membasuh anggota 6 kali) sehingga tangki air masjid cepat kehabisan bagi jemaah lain. Apakah penilaian hukum fiqh yang paling tepat?",
+                        [
+                            { text: "Perbuatan membazir air sendiri hukumnya makruh, namun boleh meningkat menjadi HARAM kerana menggunakan air wakaf/masjid melebihi kadar keperluan sehingga menzalimi hak jemaah lain.", correct: true, exp: "Analisis fiqh yang luar biasa! Para ulama Mazhab Syafi'i menjelaskan bahawa pembaziran air milik peribadi adalah makruh, tetapi membazirkan air wakaf masjid yang dikhususkan untuk kadar syarak sahaja boleh jatuh hukum haram." },
+                            { text: "Wuduk Zulkifli tidak sah kerana membasuh lebih daripada 3 kali membatalkan rukun.", correct: false, exp: "Salah. Basuhan melebihi 3 kali tidak membatalkan wuduk, cuma menyalahi sunnah." },
+                            { text: "Harus sepenuhnya kerana masjid menyediakan air secara percuma.", correct: false, exp: "Tidak tepat. Air masjid diwakafkan untuk kegunaan ibadah mengikut keperluan syarak, bukan untuk dibazirkan." }
+                        ],
+                        "Petunjuk: Bezakan antara hukum asal membazir air dengan kesan mengambil hak jemaah lain pada air wakaf."
+                    )}
+                </div>`;
+            }
+        }
+
+        // ==========================================
+        // 6. KOMPONEN KUIZ INTERAKTIF UNIVERSAL
+        // ==========================================
+        function buildQuizBox(level, topicIdx, title, question, options, hint) {
+            const quizId = `quiz-${level}-${topicIdx}`;
+            return `
+            <div id="${quizId}" class="mt-8 p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-900 to-water-900 text-white shadow-xl space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                    <span class="px-3 py-1 rounded-full bg-gold-400 text-slate-950 text-xs font-extrabold uppercase tracking-wider">
+                        <i class="fa-solid fa-bolt mr-1"></i> ${title}
+                    </span>
+                    <button onclick="toggleHint('${quizId}-hint')" class="text-xs font-bold text-water-200 hover:text-white underline flex items-center gap-1">
+                        <i class="fa-solid fa-lightbulb text-gold-400"></i> Perlukan Petunjuk?
+                    </button>
+                </div>
+
+                <p class="text-base sm:text-lg font-bold leading-relaxed text-white">${question}</p>
+
+                <!-- Petunjuk Pintar -->
+                <div id="${quizId}-hint" class="hidden p-3.5 rounded-2xl bg-white/10 border border-white/20 text-xs sm:text-sm text-gold-200">
+                    <i class="fa-solid fa-sparkles mr-1.5"></i> ${hint}
+                </div>
+
+                <!-- Pilihan Jawapan -->
+                <div class="space-y-2.5 pt-1">
+                    ${options.map((opt, idx) => `
+                        <button onclick="checkQuizAnswer('${quizId}', ${level}, ${topicIdx}, ${opt.correct}, '${opt.exp.replace(/'/g, "\\'")}')" 
+                            class="w-full text-left p-4 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 transition flex items-start gap-3 group">
+                            <span class="w-7 h-7 rounded-lg bg-white/15 group-hover:bg-gold-400 group-hover:text-slate-900 font-extrabold text-xs flex items-center justify-center shrink-0 mt-0.5 transition">
+                                ${String.fromCharCode(65 + idx)}
+                            </span>
+                            <span class="text-sm sm:text-base font-medium text-emerald-50">${opt.text}</span>
+                        </button>
+                    `).join('')}
+                </div>
+
+                <!-- Kotak Maklum Balas Segera -->
+                <div id="${quizId}-feedback" class="hidden p-4 rounded-2xl text-sm leading-relaxed"></div>
+            </div>`;
+        }
+
+        function toggleHint(hintId) {
+            playSound('click');
+            const el = document.getElementById(hintId);
+            if (el) el.classList.toggle('hidden');
+        }
+
+        function checkQuizAnswer(quizId, level, topicIdx, isCorrect, explanation) {
+            const fb = document.getElementById(`${quizId}-feedback`);
+            fb.classList.remove('hidden');
+
+            if (isCorrect) {
+                fb.className = "p-4 rounded-2xl text-sm leading-relaxed bg-emerald-500 text-white font-semibold shadow-md";
+                fb.innerHTML = `<div class="flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-check text-xl mt-0.5 text-gold-300"></i>
+                    <div>
+                        <div class="font-extrabold text-base">Tahniah! Jawapan Anda Tepat!</div>
+                        <p class="mt-1 text-emerald-50 font-normal">${explanation}</p>
+                    </div>
+                </div>`;
+                awardPointsAndCompletion(level, topicIdx, level * 20);
+            } else {
+                playSound('error');
+                fb.className = "p-4 rounded-2xl text-sm leading-relaxed bg-rose-600/90 text-white font-semibold shadow-md";
+                fb.innerHTML = `<div class="flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-xmark text-xl mt-0.5 text-rose-200"></i>
+                    <div>
+                        <div class="font-extrabold text-base">Cuba Lagi!</div>
+                        <p class="mt-1 text-rose-100 font-normal">${explanation}</p>
+                    </div>
+                </div>`;
+            }
+        }
+
+        // ==========================================
+        // 7. PENGURUSAN MODAL & NOTIFIKASI TOAST
+        // ==========================================
+        function openModal(id) {
+            playSound('click');
+            document.getElementById(id).classList.remove('hidden');
+        }
+
+        function closeModal(id) {
+            playSound('click');
+            document.getElementById(id).classList.add('hidden');
+        }
+
+        function openAchievementsModal() {
+            playSound('click');
+            document.getElementById('modal-total-score').textContent = `${appState.score} Mata`;
+            
+            const totalDone = (appState.completedTopics[1]?.length || 0) + 
+                              (appState.completedTopics[2]?.length || 0) + 
+                              (appState.completedTopics[3]?.length || 0);
+            document.getElementById('modal-completed-count').textContent = `${totalDone} / 21 Modul Selesai`;
+
+            const grid = document.getElementById('badges-grid');
+            grid.innerHTML = BADGES_CONFIG.map(b => {
+                const unlocked = appState.badges.includes(b.id);
+                return `
+                <div class="p-4 rounded-2xl border ${unlocked ? 'bg-white border-gold-400 shadow-sm' : 'bg-slate-50 border-slate-200 opacity-60'} flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${unlocked ? b.color : 'from-slate-300 to-slate-400'} text-white flex items-center justify-center text-xl shrink-0">
+                        <i class="fa-solid ${unlocked ? b.icon : 'fa-lock'}"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-sm text-slate-900">${b.title}</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">${b.desc}</p>
+                        <span class="inline-block mt-1 text-[10px] font-extrabold uppercase ${unlocked ? 'text-emerald-600' : 'text-slate-400'}">
+                            ${unlocked ? '• Berjaya Diperoleh' : '• Belum Dibuka'}
+                        </span>
+                    </div>
+                </div>`;
+            }).join('');
+
+            openModal('modal-pencapaian');
+        }
+
+        function confirmResetAll() {
+            appState = {
+                currentLevel: 1,
+                currentTopic: 0,
+                score: 0,
+                completedTopics: { 1: [], 2: [], 3: [] },
+                badges: []
+            };
+            saveState();
+            closeModal('modal-pencapaian');
+            navigateTo('home');
+            showToast("Rekod Dikosongkan", "Semua mata, lencana dan kemajuan telah ditetapkan semula.", "info");
+        }
+
+        let toastTimer = null;
+        function showToast(title, msg, type = "success") {
+            const toast = document.getElementById('toast-notification');
+            const icon = document.getElementById('toast-icon');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-msg').textContent = msg;
+
+            if (type === 'badge') {
+                icon.className = "w-8 h-8 rounded-full bg-gold-500 flex items-center justify-center text-slate-950 shrink-0";
+                icon.innerHTML = '<i class="fa-solid fa-medal"></i>';
+            } else if (type === 'info') {
+                icon.className = "w-8 h-8 rounded-full bg-water-500 flex items-center justify-center text-white shrink-0";
+                icon.innerHTML = '<i class="fa-solid fa-info"></i>';
+            } else {
+                icon.className = "w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-white shrink-0";
+                icon.innerHTML = '<i class="fa-solid fa-check"></i>';
+            }
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            if (toastTimer) clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3500);
+        }
+
+        // Mulakan Aplikasi Apabila Halaman Dimuatkan
+        window.onload = function() {
+            loadState();
+        };
+    </script>
+</body>
+</html>
